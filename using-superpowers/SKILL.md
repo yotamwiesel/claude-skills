@@ -90,6 +90,18 @@ When multiple skills could apply, use this order:
 
 The skill itself tells you which.
 
+## Skill Picker — `/`
+
+The user can type `/` at any time to open the **Skill Picker** menu.
+
+| Shortcut | Action |
+|----------|--------|
+| `/` | Show all available skills in a menu |
+| `/<skill-name>` | Directly activate a specific skill (e.g. `/copywriting`, `/seo-audit`) |
+| `/search <keyword>` | Filter skills by keyword |
+
+When the user types `/` or `/<skill-name>`, invoke the `skill-picker` skill immediately.
+
 ## User Instructions
 
 Instructions say WHAT, not HOW. "Add X" or "Fix Y" doesn't mean skip workflows.
