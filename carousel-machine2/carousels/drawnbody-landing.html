@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>הבוקסר מבד במבוק | DrawnBody</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ========== RESET & BASE ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Heebo', sans-serif;
+  background: #fff;
+  color: #1a1a1a;
+  direction: rtl;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; height: auto; display: block; }
+button { cursor: pointer; border: none; font-family: inherit; }
+ul { list-style: none; }
+
+/* ========== VARIABLES ========== */
+:root {
+  --primary: #1a1a1a;
+  --accent: #e74c3c;
+  --green: #27ae60;
+  --light-bg: #f8f8f8;
+  --border: #e0e0e0;
+  --text-muted: #666;
+  --max-width: 1200px;
+  --radius: 12px;
+}
+
+/* ========== TOP PROMO BAR ========== */
+.promo-bar {
+  background: var(--primary);
+  color: #fff;
+  text-align: center;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+.promo-bar span { color: #f1c40f; font-weight: 700; }
+
+/* ========== HEADER ========== */
+.header {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  color: var(--primary);
+}
+.logo em { font-style: normal; color: var(--accent); }
+.header-nav { display: flex; gap: 28px; align-items: center; }
+.header-nav a {
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+  transition: color 0.2s;
+}
+.header-nav a:hover { color: var(--accent); }
+.header-icons { display: flex; gap: 16px; align-items: center; }
+.header-icons svg { width: 22px; height: 22px; }
+.cart-icon {
+  position: relative;
+  background: none;
+  padding: 0;
+}
+.cart-count {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  background: var(--accent);
+  color: #fff;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+/* ========== TRUST BAR ========== */
+.trust-bar {
+  background: var(--light-bg);
+  padding: 10px 16px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  font-size: 13px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.trust-bar-item { display: flex; align-items: center; gap: 6px; }
+.trust-bar-item svg { width: 16px; height: 16px; color: var(--green); }
+
+/* ========== PRODUCT HERO ========== */
+.product-hero {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 30px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: start;
+}
+
+/* Gallery */
+.gallery { position: relative; }
+.gallery-main {
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--light-bg);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.gallery-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.gallery-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--accent);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.gallery-thumbs {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.gallery-thumb {
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  background: var(--light-bg);
+  transition: border-color 0.2s;
+}
+.gallery-thumb.active,
+.gallery-thumb:hover { border-color: var(--primary); }
+.gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Product Info */
+.product-info { padding-top: 10px; }
+.product-title {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+.product-subtitle {
+  font-size: 16px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.product-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.stars { color: #f1c40f; font-size: 18px; letter-spacing: 2px; }
+.rating-text { font-size: 14px; color: var(--text-muted); }
+
+.product-price {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.price-current {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--primary);
+}
+.price-original {
+  font-size: 20px;
+  color: #999;
+  text-decoration: line-through;
+}
+.price-save {
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: 700;
+  background: #ffeaea;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+/* Variant selectors */
+.variant-section { margin-bottom: 20px; }
+.variant-label {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.color-options { display: flex; gap: 10px; flex-wrap: wrap; }
+.color-swatch {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+.color-swatch.active { border-color: var(--primary); }
+.color-swatch:hover { transform: scale(1.1); }
+.color-swatch.black { background: #1a1a1a; }
+.color-swatch.grey { background: #9e9e9e; }
+.color-swatch.white { background: #f5f5f5; border: 2px solid #ddd; }
+.color-swatch.red { background: #c0392b; }
+.color-swatch.blue { background: #2c3e80; }
+
+.size-options { display: flex; gap: 8px; flex-wrap: wrap; }
+.size-btn {
+  min-width: 50px;
+  padding: 10px 16px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.2s;
+}
+.size-btn:hover { border-color: #999; }
+.size-btn.active {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+}
+.size-note {
+  font-size: 13px;
+  color: var(--accent);
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+/* Quantity */
+.quantity-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.qty-btn {
+  width: 42px;
+  height: 42px;
+  background: var(--light-bg);
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.qty-btn:hover { background: #e0e0e0; }
+.qty-value {
+  width: 50px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  outline: none;
+  background: #fff;
+}
+
+/* CTA */
+.cta-button {
+  width: 100%;
+  padding: 18px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s;
+  margin-bottom: 12px;
+}
+.cta-button:hover {
+  background: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+.cta-button .arrow { font-size: 22px; }
+
+.payment-methods {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--light-bg);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.payment-methods img { height: 24px; }
+.payment-methods span { font-size: 12px; color: var(--text-muted); }
+
+/* Product badges */
+.product-badges {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+.badge-item {
+  text-align: center;
+  padding: 16px 8px;
+  background: var(--light-bg);
+  border-radius: 10px;
+}
+.badge-icon { font-size: 28px; margin-bottom: 6px; }
+.badge-text { font-size: 13px; font-weight: 600; line-height: 1.4; }
+
+/* ========== UPSELL SECTION ========== */
+.upsell-section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 30px 24px;
+  border-top: 1px solid var(--border);
+}
+.upsell-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.upsell-header h3 {
+  font-size: 20px;
+  font-weight: 700;
+}
+.upsell-header .highlight {
+  color: var(--accent);
+  font-weight: 800;
+}
+.upsell-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.upsell-card {
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  transition: border-color 0.2s;
+  cursor: pointer;
+}
+.upsell-card:hover { border-color: var(--primary); }
+.upsell-card input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--primary);
+  flex-shrink: 0;
+}
+.upsell-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  background: var(--light-bg);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.upsell-img img { width: 100%; height: 100%; object-fit: cover; }
+.upsell-info { flex: 1; }
+.upsell-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.upsell-price { font-size: 15px; font-weight: 700; }
+.upsell-price .original {
+  text-decoration: line-through;
+  color: #999;
+  font-weight: 400;
+  margin-right: 6px;
+  font-size: 13px;
+}
+
+/* ========== PROBLEM SECTION ========== */
+.problem-section {
+  background: var(--light-bg);
+  padding: 60px 24px;
+  text-align: center;
+}
+.problem-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.section-tag {
+  display: inline-block;
+  background: var(--primary);
+  color: #fff;
+  padding: 6px 20px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.problem-section h2 {
+  font-size: 34px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  line-height: 1.3;
+}
+.problem-list {
+  text-align: right;
+  max-width: 500px;
+  margin: 0 auto 30px;
+}
+.problem-list li {
+  padding: 10px 0;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.problem-list li::before {
+  content: "❌";
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.solution-intro {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 30px 0 20px;
+  color: var(--green);
+}
+.solution-list {
+  text-align: right;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.solution-list li {
+  padding: 10px 0;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.solution-list li::before {
+  content: "✅";
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+/* ========== TESTIMONIAL HIGHLIGHT ========== */
+.testimonial-highlight {
+  padding: 60px 24px;
+  text-align: center;
+}
+.testimonial-highlight-inner {
+  max-width: 700px;
+  margin: 0 auto;
+  background: var(--light-bg);
+  border-radius: 20px;
+  padding: 40px;
+  position: relative;
+}
+.quote-mark {
+  font-size: 60px;
+  color: #ddd;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.testimonial-highlight blockquote {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 16px;
+}
+.testimonial-author {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.testimonial-stat {
+  margin-top: 20px;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--primary);
+}
+.testimonial-stat small {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  display: block;
+}
+
+/* ========== FEATURES GRID ========== */
+.features-section {
+  padding: 60px 24px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+.features-section h2 {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 800;
+  margin-bottom: 40px;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.feature-card {
+  background: var(--light-bg);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+.feature-card:hover { transform: translateY(-4px); }
+.feature-card-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: #e8e8e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+.feature-card-body { padding: 20px; }
+.feature-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.feature-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ========== COMPARISON TABLE ========== */
+.comparison-section {
+  background: var(--light-bg);
+  padding: 60px 24px;
+}
+.comparison-section h2 {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 800;
+  margin-bottom: 40px;
+}
+.comparison-table {
+  max-width: 700px;
+  margin: 0 auto;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.comparison-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+.comparison-table th,
+.comparison-table td {
+  padding: 16px 20px;
+  text-align: center;
+  font-size: 15px;
+  border-bottom: 1px solid var(--border);
+}
+.comparison-table th {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+}
+.comparison-table th:first-child,
+.comparison-table td:first-child { text-align: right; font-weight: 600; }
+.comparison-table td:nth-child(2) { color: var(--green); font-weight: 700; }
+.comparison-table tr:last-child td { border-bottom: none; }
+
+/* ========== QUALITY BADGES ========== */
+.quality-section {
+  padding: 60px 24px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+.quality-section h2 {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 800;
+  margin-bottom: 40px;
+}
+.quality-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.quality-card {
+  text-align: center;
+  padding: 30px 16px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  transition: all 0.3s;
+}
+.quality-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-4px);
+}
+.quality-icon { font-size: 40px; margin-bottom: 12px; }
+.quality-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.quality-card p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ========== DERMATOLOGIST ========== */
+.derm-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e9 100%);
+  padding: 60px 24px;
+  text-align: center;
+}
+.derm-inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.derm-section h2 {
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+.derm-section h2 span { color: var(--green); }
+.derm-subtitle {
+  font-size: 16px;
+  color: var(--text-muted);
+  margin-bottom: 30px;
+}
+.derm-benefits {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  text-align: right;
+}
+.derm-benefit {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 16px;
+  background: #fff;
+  border-radius: 10px;
+}
+.derm-check {
+  color: var(--green);
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.derm-benefit p { font-size: 14px; line-height: 1.5; }
+
+/* ========== CARE INSTRUCTIONS ========== */
+.care-section {
+  padding: 40px 24px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.care-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.care-section h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.care-icons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.care-item { text-align: center; }
+.care-item .icon { font-size: 32px; margin-bottom: 6px; }
+.care-item p { font-size: 13px; color: var(--text-muted); }
+
+/* ========== BONUS SECTION ========== */
+.bonus-section {
+  background: var(--primary);
+  color: #fff;
+  padding: 50px 24px;
+  text-align: center;
+}
+.bonus-inner { max-width: 600px; margin: 0 auto; }
+.bonus-section h2 {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+.bonus-section p {
+  font-size: 16px;
+  opacity: 0.85;
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+.bonus-tag {
+  display: inline-block;
+  background: var(--accent);
+  padding: 8px 24px;
+  border-radius: 20px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* ========== SHIPPING ========== */
+.shipping-section {
+  padding: 50px 24px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.shipping-section h2 {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 30px;
+}
+.shipping-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.shipping-card {
+  padding: 24px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+}
+.shipping-card .icon { font-size: 36px; margin-bottom: 10px; }
+.shipping-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+.shipping-card p { font-size: 14px; color: var(--text-muted); }
+
+/* ========== REVIEWS ========== */
+.reviews-section {
+  background: var(--light-bg);
+  padding: 60px 24px;
+}
+.reviews-section h2 {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 800;
+  margin-bottom: 40px;
+}
+.reviews-grid {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.review-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.review-stars { color: #f1c40f; font-size: 16px; margin-bottom: 12px; letter-spacing: 2px; }
+.review-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #444;
+  margin-bottom: 16px;
+}
+.review-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.review-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+}
+.review-name { font-size: 14px; font-weight: 600; }
+.review-verified { font-size: 12px; color: var(--green); }
+
+/* ========== FAQ ========== */
+.faq-section {
+  padding: 60px 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.faq-section h2 {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 800;
+  margin-bottom: 40px;
+}
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.faq-question {
+  width: 100%;
+  padding: 18px 24px;
+  background: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: right;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s;
+}
+.faq-question:hover { background: var(--light-bg); }
+.faq-arrow {
+  transition: transform 0.3s;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+.faq-answer {
+  padding: 0 24px;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.faq-item.open .faq-answer {
+  max-height: 300px;
+  padding: 0 24px 18px;
+}
+.faq-answer p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* ========== FINAL CTA ========== */
+.final-cta {
+  background: linear-gradient(135deg, var(--primary) 0%, #333 100%);
+  color: #fff;
+  padding: 60px 24px;
+  text-align: center;
+}
+.final-cta h2 {
+  font-size: 34px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+.final-cta p {
+  font-size: 16px;
+  opacity: 0.8;
+  margin-bottom: 24px;
+}
+.final-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 48px;
+  background: #fff;
+  color: var(--primary);
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 12px;
+  transition: all 0.3s;
+}
+.final-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255,255,255,0.3);
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  background: var(--primary);
+  color: #fff;
+  padding: 40px 24px 20px;
+}
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-bottom: 30px;
+}
+.footer-col h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.footer-col a {
+  display: block;
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 10px;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: #fff; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-payments {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.footer-payments .pay-icon {
+  width: 40px;
+  height: 26px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #fff;
+  font-weight: 600;
+}
+.footer-copy { font-size: 13px; color: rgba(255,255,255,0.5); }
+
+/* ========== STICKY MOBILE CTA ========== */
+.sticky-cta {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  padding: 12px 16px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+.sticky-cta-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .header-nav { display: none; }
+  .product-hero {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 16px;
+  }
+  .product-title { font-size: 26px; }
+  .price-current { font-size: 30px; }
+  .features-grid { grid-template-columns: 1fr; }
+  .quality-grid { grid-template-columns: repeat(2, 1fr); }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .upsell-grid { grid-template-columns: 1fr; }
+  .shipping-options { grid-template-columns: 1fr; }
+  .derm-benefits { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 12px; }
+  .problem-section h2 { font-size: 26px; }
+  .features-section h2,
+  .comparison-section h2,
+  .quality-section h2,
+  .reviews-section h2,
+  .faq-section h2 { font-size: 26px; }
+  .final-cta h2 { font-size: 26px; }
+  .sticky-cta { display: block; }
+  .trust-bar { gap: 16px; }
+  .product-badges { grid-template-columns: 1fr; }
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-in {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+}
+</style>
+</head>
+<body>
+
+<!-- ===== PROMO BAR ===== -->
+<div class="promo-bar">
+  מבצע סוף שנה <span>עד 50% הנחה</span> על כל האתר
+</div>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">Drawn<em>Body</em></div>
+    <nav class="header-nav">
+      <a href="#">דף הבית</a>
+      <a href="#">ביגוד גברים</a>
+      <a href="#">מבצעים</a>
+      <a href="#">כרטיס מתנה</a>
+      <a href="#">מעקב הזמנה</a>
+      <a href="#">אודות</a>
+    </nav>
+    <div class="header-icons">
+      <button class="cart-icon" onclick="window.location.href=checkoutUrl">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+        <span class="cart-count">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== TRUST BAR ===== -->
+<div class="trust-bar">
+  <div class="trust-bar-item">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <span>מעל 15,000 לקוחות מרוצים</span>
+  </div>
+  <div class="trust-bar-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    <span>משלוח חינם מעל ₪279</span>
+  </div>
+  <div class="trust-bar-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <span>החלפת מידה חינם עד 30 יום</span>
+  </div>
+</div>
+
+<!-- ===== PRODUCT HERO ===== -->
+<section class="product-hero">
+  <!-- Gallery -->
+  <div class="gallery">
+    <div class="gallery-main">
+      <div class="gallery-badge">-25%</div>
+      <!-- ===== REPLACE: Product main image ===== -->
+      <div style="width:100%;height:100%;background:#e8e8e8;display:flex;align-items:center;justify-content:center;font-size:18px;color:#999;">תמונת מוצר ראשית</div>
+    </div>
+    <div class="gallery-thumbs">
+      <div class="gallery-thumb active"><div style="width:100%;height:100%;background:#ddd;"></div></div>
+      <div class="gallery-thumb"><div style="width:100%;height:100%;background:#ccc;"></div></div>
+      <div class="gallery-thumb"><div style="width:100%;height:100%;background:#d5d5d5;"></div></div>
+      <div class="gallery-thumb"><div style="width:100%;height:100%;background:#e0e0e0;"></div></div>
+      <div class="gallery-thumb"><div style="width:100%;height:100%;background:#c8c8c8;"></div></div>
+    </div>
+  </div>
+
+  <!-- Product Info -->
+  <div class="product-info">
+    <h1 class="product-title">הבוקסר מבד במבוק של DrawnBody</h1>
+    <p class="product-subtitle">בד במבוק פרימיום | נושם | אנטי-בקטריאלי</p>
+
+    <div class="product-rating">
+      <span class="stars">★★★★★</span>
+      <span class="rating-text">(247 ביקורות)</span>
+    </div>
+
+    <div class="product-price">
+      <span class="price-current">₪89.00</span>
+      <span class="price-original">₪119.00</span>
+      <span class="price-save">חוסכים 25%</span>
+    </div>
+
+    <!-- Color -->
+    <div class="variant-section">
+      <div class="variant-label">צבע: <strong>שחור</strong></div>
+      <div class="color-options">
+        <button class="color-swatch black active" data-color="שחור" title="שחור"></button>
+        <button class="color-swatch grey" data-color="אפור" title="אפור"></button>
+        <button class="color-swatch white" data-color="לבן" title="לבן"></button>
+        <button class="color-swatch red" data-color="אדום" title="אדום"></button>
+        <button class="color-swatch blue" data-color="כחול" title="כחול"></button>
+      </div>
+    </div>
+
+    <!-- Size -->
+    <div class="variant-section">
+      <div class="variant-label">מידה:</div>
+      <div class="size-options">
+        <button class="size-btn" data-size="XS">XS</button>
+        <button class="size-btn" data-size="S">S</button>
+        <button class="size-btn active" data-size="M">M</button>
+        <button class="size-btn" data-size="L">L</button>
+        <button class="size-btn" data-size="XL">XL</button>
+        <button class="size-btn" data-size="2XL">2XL</button>
+        <button class="size-btn" data-size="3XL">3XL</button>
+      </div>
+      <p class="size-note">* מומלץ לקחת מידה אחת מעל הרגיל</p>
+    </div>
+
+    <!-- Quantity -->
+    <div class="quantity-row">
+      <span style="font-weight:600;">כמות:</span>
+      <div class="quantity-selector">
+        <button class="qty-btn" onclick="changeQty(-1)">−</button>
+        <input type="text" class="qty-value" value="1" readonly id="qtyInput">
+        <button class="qty-btn" onclick="changeQty(1)">+</button>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <a href="#" id="mainCta" class="cta-button" onclick="goToCheckout()">
+      הוסף להזמנה <span class="arrow">👈</span>
+    </a>
+
+    <!-- Payment Methods -->
+    <div class="payment-methods">
+      <span>אמצעי תשלום מאובטחים:</span>
+      <div style="display:flex;gap:6px;">
+        <div style="background:#1a1f71;color:#fff;padding:4px 8px;border-radius:4px;font-size:11px;font-weight:700;">VISA</div>
+        <div style="background:#eb001b;color:#fff;padding:4px 8px;border-radius:4px;font-size:11px;font-weight:700;">MC</div>
+        <div style="background:#000;color:#fff;padding:4px 8px;border-radius:4px;font-size:11px;font-weight:700;">AMEX</div>
+        <div style="background:#000;color:#fff;padding:4px 8px;border-radius:4px;font-size:11px;font-weight:700;">Pay</div>
+      </div>
+    </div>
+
+    <!-- Badges -->
+    <div class="product-badges">
+      <div class="badge-item">
+        <div class="badge-icon">🔄</div>
+        <div class="badge-text">החלפות מידה<br>בחינם</div>
+      </div>
+      <div class="badge-item">
+        <div class="badge-icon">🚚</div>
+        <div class="badge-text">משלוח<br>מהיר</div>
+      </div>
+      <div class="badge-item">
+        <div class="badge-icon">📅</div>
+        <div class="badge-text">שינוי מידה<br>עד 30 ימים</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== UPSELL ===== -->
+<section class="upsell-section">
+  <div class="upsell-header">
+    <h3><span class="highlight">86%</span> מהלקוחות הוסיפו גם:</h3>
+  </div>
+  <div class="upsell-grid">
+    <label class="upsell-card">
+      <input type="checkbox">
+      <div class="upsell-img"><div style="width:100%;height:100%;background:#e0e0e0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#999;">גרביים</div></div>
+      <div class="upsell-info">
+        <div class="upsell-name">גרביים מבד במבוק</div>
+        <div class="upsell-price"><span class="original">₪119</span> ₪89</div>
+      </div>
+    </label>
+    <label class="upsell-card">
+      <input type="checkbox">
+      <div class="upsell-img"><div style="width:100%;height:100%;background:#e0e0e0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#999;">חולצה</div></div>
+      <div class="upsell-info">
+        <div class="upsell-name">חולצת טי צבעונית</div>
+        <div class="upsell-price"><span class="original">₪199.95</span> ₪139</div>
+      </div>
+    </label>
+  </div>
+</section>
+
+<!-- ===== PROBLEM/SOLUTION ===== -->
+<section class="problem-section">
+  <div class="problem-inner">
+    <span class="section-tag">הבעיה</span>
+    <h2>אתה מתקן את הבוקסר שלך כל היום?</h2>
+    <ul class="problem-list">
+      <li>הבוקסר מתקפל ונדבק לעור</li>
+      <li>זיעה מוגזמת ותחושת לחות</li>
+      <li>גירויים ושפשופים לאורך היום</li>
+      <li>הגומי לוחץ ומשאיר סימנים</li>
+      <li>נקרע אחרי כמה כביסות</li>
+    </ul>
+    <p class="solution-intro">הפתרון: בד במבוק של DrawnBody</p>
+    <ul class="solution-list">
+      <li>בד במבוק™ נושם עם ייבוש מהיר</li>
+      <li>חורים זעירים לסירקולציית אוויר (40% פחות זיעה)</li>
+      <li>גומי חכם שלא לוחץ ולא משאיר סימנים</li>
+      <li>80% ויסקוזה במבוק, 20% מודל</li>
+      <li>עמיד לעשרות כביסות בלי להיקרע</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIAL HIGHLIGHT ===== -->
+<section class="testimonial-highlight">
+  <div class="testimonial-highlight-inner">
+    <div class="quote-mark">"</div>
+    <blockquote>
+      חשבתי שכל הבוקסרים אותו דבר... עד שניסיתי את DrawnBody. בלי התקפלויות, בלי שפשופים, בלי זיעה. זה כמו לא ללבוש כלום אבל עם תמיכה מושלמת.
+    </blockquote>
+    <div class="testimonial-author">— דני מ., לקוח מאומת</div>
+    <div class="testimonial-stat">
+      81%
+      <small>מהלקוחות מדווחים על נוחות מיידית</small>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="features-section">
+  <h2>למה הבוקסר הזה שונה?</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-card-img">🙅‍♂️</div>
+      <div class="feature-card-body">
+        <h3>בלי לתקן את הבוקסר</h3>
+        <p>גזרה ארגונומית שנשארת במקום לאורך כל היום, בלי תיקונים מביכים</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-card-img">🏋️</div>
+      <div class="feature-card-body">
+        <h3>אימון מלא בלי הדבקות</h3>
+        <p>בד נושם עם ייבוש מהיר שמונע תחושת לחות גם באימון אינטנסיבי</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-card-img">👕</div>
+      <div class="feature-card-body">
+        <h3>נשאר חדש אחרי עשרות כביסות</h3>
+        <p>סיבי במבוק פרימיום ששומרים על הצורה, הצבע והגמישות לאורך זמן</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-card-img">📏</div>
+      <div class="feature-card-body">
+        <h3>התאמה מדויקת בלי לחץ</h3>
+        <p>גומי חכם שמחזיק בלי ללחוץ - בלי סימנים אדומים על העור</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-card-img">🦠</div>
+      <div class="feature-card-body">
+        <h3>אנטי-בקטריאלי טבעי</h3>
+        <p>סיבי הבמבוק מכילים תכונות אנטי-בקטריאליות טבעיות שמונעות התרבות חיידקים</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-card-img">🌬️</div>
+      <div class="feature-card-body">
+        <h3>נטרול ריחות</h3>
+        <p>הבד סופח לחות ומונע היווצרות ריחות לאורך כל היום</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPARISON ===== -->
+<section class="comparison-section">
+  <h2>למה DrawnBody ולא מותגים אחרים?</h2>
+  <div class="comparison-table">
+    <table>
+      <thead>
+        <tr>
+          <th>תכונה</th>
+          <th>DrawnBody</th>
+          <th>מותגים אחרים</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>ספיגת זיעה</td><td>✅</td><td>❌</td></tr>
+        <tr><td>מניעת שפשופים</td><td>✅</td><td>❌</td></tr>
+        <tr><td>ללא התקפלויות</td><td>✅</td><td>❌</td></tr>
+        <tr><td>חיסכון לטווח ארוך</td><td>✅</td><td>❌</td></tr>
+        <tr><td>עמיד לקריעה</td><td>✅</td><td>❌</td></tr>
+        <tr><td>משלוח חינם</td><td>✅</td><td>❌</td></tr>
+        <tr><td>החלפה חינם 30 יום</td><td>✅</td><td>❌</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== QUALITY BADGES ===== -->
+<section class="quality-section">
+  <h2>איכות ללא פשרות</h2>
+  <div class="quality-grid">
+    <div class="quality-card">
+      <div class="quality-icon">🚫</div>
+      <h3>ללא ריחות</h3>
+      <p>תכונות אנטי-בקטריאליות טבעיות מונעות היווצרות ריחות</p>
+    </div>
+    <div class="quality-card">
+      <div class="quality-icon">💨</div>
+      <h3>נושם ומתייבש מהר</h3>
+      <p>סירקולציית אוויר מיטבית ששומרת על תחושת רעננות</p>
+    </div>
+    <div class="quality-card">
+      <div class="quality-icon">✨</div>
+      <h3>ללא קמטים</h3>
+      <p>הבד שומר על מראה חלק ומסודר גם אחרי יום שלם</p>
+    </div>
+    <div class="quality-card">
+      <div class="quality-icon">🔄</div>
+      <h3>גמישות מקסימלית</h3>
+      <p>נמתח ומתאים את עצמו בלי לאבד צורה</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DERMATOLOGIST ===== -->
+<section class="derm-section">
+  <div class="derm-inner">
+    <h2>מאושר על ידי <span>רופאי עור</span></h2>
+    <p class="derm-subtitle">הבוקסר שלנו עבר בדיקות דרמטולוגיות ואושר כבטוח לכל סוגי העור</p>
+    <div class="derm-benefits">
+      <div class="derm-benefit">
+        <span class="derm-check">✅</span>
+        <p>בטוח לעור רגיש - ללא חומרים כימיים מגרים</p>
+      </div>
+      <div class="derm-benefit">
+        <span class="derm-check">✅</span>
+        <p>היפואלרגני - מפחית סיכון לגירויים ואלרגיות</p>
+      </div>
+      <div class="derm-benefit">
+        <span class="derm-check">✅</span>
+        <p>ויסות טמפרטורה טבעי - חם בחורף, קריר בקיץ</p>
+      </div>
+      <div class="derm-benefit">
+        <span class="derm-check">✅</span>
+        <p>מונע גירויים באזורים רגישים לאורך כל היום</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CARE INSTRUCTIONS ===== -->
+<section class="care-section">
+  <div class="care-inner">
+    <h3>הוראות טיפול</h3>
+    <div class="care-icons">
+      <div class="care-item">
+        <div class="icon">🌡️</div>
+        <p>כביסה קרה<br>עד 30°C</p>
+      </div>
+      <div class="care-item">
+        <div class="icon">🌀</div>
+        <p>סחיטה<br>עד 600</p>
+      </div>
+      <div class="care-item">
+        <div class="icon">🌤️</div>
+        <p>ייבוש בצל<br>בלבד</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BONUS ===== -->
+<section class="bonus-section">
+  <div class="bonus-inner">
+    <h2>🎁 מתנה עם כל הזמנה!</h2>
+    <p>קבלו מיני קורס בניית שרירים + תוכנית אימונים מלאה בחינם עם כל רכישה</p>
+    <div class="bonus-tag">שווי ₪199 - חינם!</div>
+  </div>
+</section>
+
+<!-- ===== SHIPPING ===== -->
+<section class="shipping-section">
+  <h2>זמני משלוח</h2>
+  <div class="shipping-options">
+    <div class="shipping-card">
+      <div class="icon">📦</div>
+      <h3>משלוח רגיל</h3>
+      <p>7-14 ימי עסקים</p>
+    </div>
+    <div class="shipping-card">
+      <div class="icon">⚡</div>
+      <h3>משלוח אקספרס</h3>
+      <p>6-12 ימי עסקים</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REVIEWS ===== -->
+<section class="reviews-section">
+  <h2>מה הלקוחות אומרים</h2>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">הבוקסר הכי נוח שהיה לי אי פעם. הזמנתי אחד לנסיון ותוך שבוע הזמנתי עוד 5. פשוט אי אפשר לחזור לבוקסרים רגילים.</p>
+      <div class="review-author">
+        <div class="review-avatar">י</div>
+        <div>
+          <div class="review-name">יוסי כ.</div>
+          <div class="review-verified">✓ רכישה מאומתת</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">עובד בחוץ כל היום ותמיד סבלתי מזיעה ושפשופים. מאז שעברתי ל-DrawnBody זה שינוי מטורף. ממליץ בחום!</p>
+      <div class="review-author">
+        <div class="review-avatar">א</div>
+        <div>
+          <div class="review-name">אביב מ.</div>
+          <div class="review-verified">✓ רכישה מאומתת</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">קניתי לבעלי ליום הולדת. הוא כל כך אהב שביקש שאזמין עוד. האיכות מורגשת ברגע שנוגעים בבד. ממליצה!</p>
+      <div class="review-author">
+        <div class="review-avatar">ש</div>
+        <div>
+          <div class="review-name">שירה ל.</div>
+          <div class="review-verified">✓ רכישה מאומתת</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">כספורטאי, הבוקסר הזה פשוט משנה חוקים. באימונים אין יותר הדבקות, והייבוש המהיר שומר עליי יבש. שווה כל שקל.</p>
+      <div class="review-author">
+        <div class="review-avatar">ד</div>
+        <div>
+          <div class="review-name">דן ר.</div>
+          <div class="review-verified">✓ רכישה מאומתת</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">אחרי שנים של בוקסרים שנקרעים אחרי חודשיים - סוף סוף מצאתי אחד שמחזיק מעמד. כבר חצי שנה והוא כמו חדש.</p>
+      <div class="review-author">
+        <div class="review-avatar">מ</div>
+        <div>
+          <div class="review-name">מיכאל ד.</div>
+          <div class="review-verified">✓ רכישה מאומתת</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">הפתעה לטובה. הבד ממש רך ונעים, הגומי לא לוחץ בכלל, ואין תחושת חום מוגזמת. הזמנתי בכל הצבעים.</p>
+      <div class="review-author">
+        <div class="review-avatar">ע</div>
+        <div>
+          <div class="review-name">עמית ב.</div>
+          <div class="review-verified">✓ רכישה מאומתת</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq-section">
+  <h2>שאלות נפוצות</h2>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      <span>מה ההבדל מבוקסרים רגילים?</span>
+      <span class="faq-arrow">▼</span>
+    </button>
+    <div class="faq-answer">
+      <p>הבוקסר שלנו עשוי מ-80% ויסקוזה במבוק ו-20% מודל, מה שנותן לו תכונות ייחודיות: נושם פי 3 מכותנה רגילה, אנטי-בקטריאלי טבעי, ומתייבש מהר יותר. בנוסף, הגזרה הארגונומית מונעת התקפלויות ושפשופים.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      <span>מה קורה אם המוצר הגיע פגום?</span>
+      <span class="faq-arrow">▼</span>
+    </button>
+    <div class="faq-answer">
+      <p>אנחנו מציעים החלפה מלאה ללא עלות על כל מוצר שמגיע פגום. פשוט פנו לשירות הלקוחות שלנו עם תמונה של הפגם ונשלח לכם מוצר חדש מיד.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      <span>כמה זמן לוקח המשלוח?</span>
+      <span class="faq-arrow">▼</span>
+    </button>
+    <div class="faq-answer">
+      <p>משלוח רגיל: 7-14 ימי עסקים. משלוח אקספרס: 6-12 ימי עסקים. ייתכנו עיכובים קלים בתקופות עומס או בשל בדיקות ביטחוניות.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      <span>מה אם המידה לא מתאימה?</span>
+      <span class="faq-arrow">▼</span>
+    </button>
+    <div class="faq-answer">
+      <p>אין בעיה! אנחנו מציעים החלפת מידה חינם עד 30 יום מרגע קבלת המוצר. פשוט פנו אלינו ונסדר החלפה מהירה.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      <span>האם אפשר לשנות הזמנה שכבר בוצעה?</span>
+      <span class="faq-arrow">▼</span>
+    </button>
+    <div class="faq-answer">
+      <p>כן, ניתן לשנות הזמנה כל עוד היא טרם נשלחה. פנו לשירות הלקוחות שלנו בהקדם האפשרי עם מספר ההזמנה.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" onclick="toggleFaq(this)">
+      <span>האם אתם שולחים לכל הארץ?</span>
+      <span class="faq-arrow">▼</span>
+    </button>
+    <div class="faq-answer">
+      <p>כן! אנחנו שולחים לכל רחבי ישראל. משלוח חינם להזמנות מעל ₪279.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final-cta">
+  <h2>מוכנים לשדרג?</h2>
+  <p>הצטרפו לאלפי גברים שכבר עשו את המעבר לבוקסר שמשנה את חוקי המשחק</p>
+  <a href="#" class="final-cta-btn" onclick="goToCheckout()">הזמינו עכשיו 👈</a>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>תפריט ראשי</h4>
+      <a href="#">דף הבית</a>
+      <a href="#">ביגוד גברים</a>
+      <a href="#">מבצעים</a>
+      <a href="#">כרטיס מתנה</a>
+    </div>
+    <div class="footer-col">
+      <h4>עזרה</h4>
+      <a href="#">שאלות נפוצות</a>
+      <a href="#">מדיניות החזרות</a>
+      <a href="#">מדיניות פרטיות</a>
+      <a href="#">תנאי שימוש</a>
+      <a href="#">מדיניות משלוחים</a>
+    </div>
+    <div class="footer-col">
+      <h4>על DrawnBody</h4>
+      <p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.7;">אנחנו מאמינים שהנוחות מתחילה מהבסיס. הבוקסרים שלנו מיוצרים מחומרים פרימיום שנבחרו בקפידה כדי לתת לכם את הנוחות המקסימלית.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026, DrawnBody. כל הזכויות שמורות.</span>
+    <div class="footer-payments">
+      <div class="pay-icon">VISA</div>
+      <div class="pay-icon">MC</div>
+      <div class="pay-icon">AMEX</div>
+      <div class="pay-icon">Pay</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== STICKY MOBILE CTA ===== -->
+<div class="sticky-cta">
+  <a href="#" class="sticky-cta-btn" onclick="goToCheckout()">הוסף להזמנה - ₪89 👈</a>
+</div>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+// =============================================
+// SHOPIFY CHECKOUT CONFIGURATION
+// =============================================
+//
+// HOW TO SET UP:
+// 1. Replace YOUR-STORE-NAME with your Shopify store name
+// 2. Replace the VARIANT_ID values with your actual Shopify variant IDs
+//
+// TO FIND VARIANT IDs:
+// Go to Shopify Admin > Products > [Product] > Variants
+// The variant ID is in the URL when you click on a variant
+// Or use: https://YOUR-STORE-NAME.myshopify.com/products/PRODUCT-HANDLE.json
+//
+// =============================================
+
+const SHOPIFY_STORE = 'YOUR-STORE-NAME'; // <-- שם החנות שלך בשופיפיי
+
+// Variant IDs per color+size combination
+// Replace these with your actual Shopify variant IDs
+const VARIANTS = {
+  'שחור-XS': 'VARIANT_ID_HERE',
+  'שחור-S': 'VARIANT_ID_HERE',
+  'שחור-M': 'VARIANT_ID_HERE',
+  'שחור-L': 'VARIANT_ID_HERE',
+  'שחור-XL': 'VARIANT_ID_HERE',
+  'שחור-2XL': 'VARIANT_ID_HERE',
+  'שחור-3XL': 'VARIANT_ID_HERE',
+  'אפור-XS': 'VARIANT_ID_HERE',
+  'אפור-S': 'VARIANT_ID_HERE',
+  'אפור-M': 'VARIANT_ID_HERE',
+  'אפור-L': 'VARIANT_ID_HERE',
+  'אפור-XL': 'VARIANT_ID_HERE',
+  'אפור-2XL': 'VARIANT_ID_HERE',
+  'אפור-3XL': 'VARIANT_ID_HERE',
+  'לבן-XS': 'VARIANT_ID_HERE',
+  'לבן-S': 'VARIANT_ID_HERE',
+  'לבן-M': 'VARIANT_ID_HERE',
+  'לבן-L': 'VARIANT_ID_HERE',
+  'לבן-XL': 'VARIANT_ID_HERE',
+  'לבן-2XL': 'VARIANT_ID_HERE',
+  'לבן-3XL': 'VARIANT_ID_HERE',
+  'אדום-XS': 'VARIANT_ID_HERE',
+  'אדום-S': 'VARIANT_ID_HERE',
+  'אדום-M': 'VARIANT_ID_HERE',
+  'אדום-L': 'VARIANT_ID_HERE',
+  'אדום-XL': 'VARIANT_ID_HERE',
+  'אדום-2XL': 'VARIANT_ID_HERE',
+  'אדום-3XL': 'VARIANT_ID_HERE',
+  'כחול-XS': 'VARIANT_ID_HERE',
+  'כחול-S': 'VARIANT_ID_HERE',
+  'כחול-M': 'VARIANT_ID_HERE',
+  'כחול-L': 'VARIANT_ID_HERE',
+  'כחול-XL': 'VARIANT_ID_HERE',
+  'כחול-2XL': 'VARIANT_ID_HERE',
+  'כחול-3XL': 'VARIANT_ID_HERE',
+};
+
+// State
+let selectedColor = 'שחור';
+let selectedSize = 'M';
+let quantity = 1;
+
+// Checkout URL builder
+function getCheckoutUrl() {
+  const key = selectedColor + '-' + selectedSize;
+  const variantId = VARIANTS[key] || 'VARIANT_ID_HERE';
+  return `https://${SHOPIFY_STORE}.myshopify.com/cart/${variantId}:${quantity}`;
+}
+
+function goToCheckout() {
+  const url = getCheckoutUrl();
+  if (url.includes('VARIANT_ID_HERE') || url.includes('YOUR-STORE-NAME')) {
+    alert('יש להגדיר את שם החנות ואת variant IDs בקוד.\nראה הוראות בתחילת ה-JavaScript.');
+    return;
+  }
+  window.location.href = url;
+}
+
+// Color selection
+document.querySelectorAll('.color-swatch').forEach(swatch => {
+  swatch.addEventListener('click', function() {
+    document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+    this.classList.add('active');
+    selectedColor = this.dataset.color;
+    document.querySelector('.variant-label strong').textContent = selectedColor;
+  });
+});
+
+// Size selection
+document.querySelectorAll('.size-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    selectedSize = this.dataset.size;
+  });
+});
+
+// Quantity
+function changeQty(delta) {
+  quantity = Math.max(1, quantity + delta);
+  document.getElementById('qtyInput').value = quantity;
+}
+
+// FAQ toggle
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const wasOpen = item.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  // Toggle current
+  if (!wasOpen) item.classList.add('open');
+}
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('animate-in');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.feature-card, .quality-card, .review-card, .derm-benefit').forEach(el => {
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>

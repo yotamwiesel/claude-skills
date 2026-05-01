@@ -1,0 +1,248 @@
+<style>
+  .tdy-section {
+    background: #f5f5f0;
+    padding: 50px 20px;
+    direction: rtl;
+    font-family: 'Assistant', 'Heebo', Arial, sans-serif;
+  }
+  .tdy-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+  }
+  /* Right side - text block */
+  .tdy-text {
+    flex: 1;
+    padding: 40px 40px 40px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .tdy-text h2 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #222;
+    margin: 0 0 20px 0;
+    line-height: 1.4;
+  }
+  .tdy-text p {
+    font-size: 15px;
+    line-height: 1.9;
+    color: #555;
+    margin: 0;
+  }
+  /* Center - comparison table */
+  .tdy-table-wrap {
+    flex: 0 0 420px;
+    display: flex;
+    align-items: center;
+    padding: 20px 10px;
+  }
+  .tdy-table {
+    width: 100%;
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  }
+  .tdy-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .tdy-header .tdy-h-green {
+    background: #4a8c5c;
+    color: #fff;
+    padding: 16px 12px;
+  }
+  .tdy-header .tdy-h-gray {
+    background: #e9e9e9;
+    color: #666;
+    padding: 16px 12px;
+  }
+  .tdy-rows {
+    padding: 4px 0;
+  }
+  .tdy-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 12px 18px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  .tdy-row:last-child {
+    border-bottom: none;
+  }
+  .tdy-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tdy-cell-green {
+    color: #2d6e3f;
+    font-weight: 600;
+  }
+  .tdy-cell-gray {
+    color: #999;
+  }
+  .tdy-check {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    background: #4a8c5c;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tdy-check::after {
+    content: '\2713';
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .tdy-x {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    background: #e0e0e0;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tdy-x::after {
+    content: '\2715';
+    color: #aaa;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  /* Left side - product image on green bg */
+  .tdy-img-wrap {
+    flex: 0 0 300px;
+    background: #4a8c5c;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+  }
+  .tdy-img-wrap::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 120px;
+    height: 120px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+  }
+  .tdy-img-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    width: 80px;
+    height: 80px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .tdy-img-wrap img {
+    max-width: 220px;
+    width: 100%;
+    border-radius: 14px;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 960px) {
+    .tdy-inner {
+      flex-direction: column;
+      gap: 24px;
+      align-items: center;
+    }
+    .tdy-text {
+      padding: 20px;
+      text-align: center;
+      order: 1;
+    }
+    .tdy-table-wrap {
+      flex: 0 0 auto;
+      width: 100%;
+      max-width: 440px;
+      padding: 0;
+      order: 2;
+    }
+    .tdy-img-wrap {
+      flex: 0 0 auto;
+      width: 260px;
+      height: 260px;
+      order: 3;
+    }
+  }
+</style>
+
+<section class="tdy-section">
+  <div class="tdy-inner">
+
+    <div class="tdy-text">
+      <h2>למה Toddly עדיף על כל שאר הגימיקים</h2>
+      <p>
+        לא כל תחתוני הגמילה באמת עוזרים בגמילה.
+        רוב הפתרונות האחרים לא עובדים ובכלל.
+        כי הם פשוט נראים מחוזים – אבל לא סופגים טוב, לא נותנים תחושת
+        רטיבות, ונכשל שורדים בכיסים.
+        <br><br>
+        התחתונים שלנו פותחו בקפידה – עם שכבת ספיגה חכמה, עיצוב עדין
+        ללבישה, וחומר איכותי שלא מגרה את העור.
+        <br><br>
+        כי את לא צריכה "עוד מוצר מחוד." את צריכה פתרון שבאמת עובד – גם לך,
+        וגם לו.
+      </p>
+    </div>
+
+    <div class="tdy-table-wrap">
+      <div class="tdy-table">
+        <div class="tdy-header">
+          <div class="tdy-h-green">Toddly תחתוני אימון</div>
+          <div class="tdy-h-gray">חיתולים חד פעמיים</div>
+        </div>
+        <div class="tdy-rows">
+          <div class="tdy-row">
+            <div class="tdy-cell tdy-cell-green"><span class="tdy-check"></span> רב שימושיים, שורדים חודשים</div>
+            <div class="tdy-cell tdy-cell-gray"><span class="tdy-x"></span> חד פעמיים - ישר לפח</div>
+          </div>
+          <div class="tdy-row">
+            <div class="tdy-cell tdy-cell-green"><span class="tdy-check"></span> עדינים ומושלמים לעור רגיש</div>
+            <div class="tdy-cell tdy-cell-gray"><span class="tdy-x"></span> עשויים מחומרים סינתטיים</div>
+          </div>
+          <div class="tdy-row">
+            <div class="tdy-cell tdy-cell-green"><span class="tdy-check"></span> בונים מודעות גופנית</div>
+            <div class="tdy-cell tdy-cell-gray"><span class="tdy-x"></span> מונעים מודעות גופנית</div>
+          </div>
+          <div class="tdy-row">
+            <div class="tdy-cell tdy-cell-green"><span class="tdy-check"></span> מרגישים כמו תחתונים של "גדולים"</div>
+            <div class="tdy-cell tdy-cell-gray"><span class="tdy-x"></span> מרגישים כמו חיתול רגיל</div>
+          </div>
+          <div class="tdy-row">
+            <div class="tdy-cell tdy-cell-green"><span class="tdy-check"></span> מאיצים את תהליך הגמילה</div>
+            <div class="tdy-cell tdy-cell-gray"><span class="tdy-x"></span> תהליך גמילה ארוך ומשמעותי</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tdy-img-wrap">
+      <img src="IMAGE_URL_HERE" alt="Toddly תחתוני אימון" loading="lazy">
+    </div>
+
+  </div>
+</section>

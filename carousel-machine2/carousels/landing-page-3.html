@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>אביב מלכא — בנה עסק איקומרס רווחי תוך 30 יום</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            direction: rtl;
+            background: #1a1a2e;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .hero-dark {
+            flex: 0 0 60%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 60px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(244, 163, 0, 0.15);
+            border: 1px solid #f4a300;
+            color: #ffc107;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            width: fit-content;
+        }
+
+        .hero-headline {
+            font-size: 56px;
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            color: #fff;
+        }
+
+        .hero-subheadline {
+            font-size: 20px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: linear-gradient(135deg, #f4a300, #ffc107);
+            color: #fff;
+            font-size: 22px;
+            font-weight: 700;
+            padding: 18px 50px;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 8px 30px rgba(244,163,0,0.4);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 12px 40px rgba(244,163,0,0.6);
+        }
+
+        .hero-gold {
+            flex: 0 0 40%;
+            background: linear-gradient(135deg, #f4a300, #ffc107);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 40px;
+            position: relative;
+        }
+
+        .hero-gold::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .countdown-container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .countdown-label {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 20px;
+        }
+
+        .countdown {
+            display: flex;
+            gap: 16px;
+            direction: ltr;
+            margin-bottom: 30px;
+        }
+
+        .countdown-item {
+            background: rgba(26,26,46,0.9);
+            border-radius: 12px;
+            padding: 16px 20px;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .countdown-number {
+            font-size: 42px;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .countdown-unit {
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
+            margin-top: 4px;
+        }
+
+        .spots-left {
+            position: relative;
+            z-index: 1;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a1a2e;
+            background: rgba(255,255,255,0.3);
+            padding: 12px 28px;
+            border-radius: 10px;
+        }
+
+        /* ===== STATS STRIP ===== */
+        .stats-strip {
+            background: #0f0f23;
+            padding: 50px 40px;
+        }
+
+        .stats-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 44px;
+            font-weight: 900;
+            color: #fff;
+            display: inline-block;
+            border-bottom: 4px solid #f4a300;
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: rgba(255,255,255,0.6);
+            display: block;
+            margin-top: 8px;
+        }
+
+        /* ===== PROBLEM SECTION ===== */
+        .problem-section {
+            background: #fff;
+            color: #1a1a2e;
+            padding: 100px 60px 80px;
+            position: relative;
+            clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .problem-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .problem-text {
+            flex: 1;
+        }
+
+        .problem-headline {
+            font-size: 42px;
+            font-weight: 900;
+            color: #1a1a2e;
+            margin-bottom: 40px;
+        }
+
+        .pain-bullet {
+            border-right: 4px solid #e74c3c;
+            padding: 16px 24px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+            background: #fafafa;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .problem-icon {
+            flex: 0 0 200px;
+            font-size: 160px;
+            text-align: center;
+            opacity: 0.15;
+        }
+
+        /* ===== COMPARISON ===== */
+        .comparison-section {
+            display: flex;
+            min-height: 500px;
+        }
+
+        .comparison-old {
+            flex: 1;
+            background: #2c1a1a;
+            padding: 80px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .comparison-new {
+            flex: 1;
+            background: #16213e;
+            padding: 80px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .comparison-new::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #f4a300, #ffc107);
+        }
+
+        .comparison-heading {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 30px;
+        }
+
+        .comparison-heading.red { color: #e74c3c; }
+        .comparison-heading.gold { color: #f4a300; }
+
+        .comparison-list {
+            list-style: none;
+        }
+
+        .comparison-list li {
+            font-size: 18px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .comparison-list li i {
+            font-size: 16px;
+        }
+
+        .comparison-old .comparison-list li i { color: #e74c3c; }
+        .comparison-new .comparison-list li i { color: #f4a300; }
+
+        .vs-badge {
+            position: absolute;
+            top: 50%;
+            right: -32px;
+            transform: translateY(-50%);
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #f4a300, #ffc107);
+            color: #1a1a2e;
+            font-size: 22px;
+            font-weight: 900;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        /* ===== DISCOVER SECTION ===== */
+        .discover-section {
+            background: #fff;
+            color: #1a1a2e;
+            padding: 100px 60px 80px;
+            clip-path: polygon(0 4%, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .discover-headline {
+            font-size: 42px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .discover-items {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .discover-item {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 28px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .discover-item:nth-child(even) {
+            flex-direction: row-reverse;
+            text-align: left;
+        }
+
+        .discover-number {
+            flex-shrink: 0;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #f4a300, #ffc107);
+            color: #fff;
+            font-size: 24px;
+            font-weight: 900;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .discover-text {
+            font-size: 19px;
+            font-weight: 500;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* ===== AI SECTION ===== */
+        .ai-section {
+            background: #1a1a2e;
+            padding: 100px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-section::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: -10%;
+            width: 120%;
+            height: 120px;
+            background: linear-gradient(135deg, #f4a300, #ffc107);
+            transform: rotate(-2deg);
+            opacity: 0.15;
+        }
+
+        .ai-headline {
+            font-size: 42px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .ai-headline span { color: #f4a300; }
+
+        .ai-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            gap: 30px;
+        }
+
+        .ai-card {
+            flex: 1;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            border-bottom: 4px solid #f4a300;
+            transition: transform 0.3s;
+        }
+
+        .ai-card:hover {
+            transform: scale(1.05);
+        }
+
+        .ai-icon {
+            font-size: 56px;
+            margin-bottom: 20px;
+        }
+
+        .ai-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        .about-section {
+            display: flex;
+            min-height: 350px;
+        }
+
+        .about-gold {
+            flex: 0 0 40%;
+            background: linear-gradient(135deg, #f4a300, #ffc107);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-quote-icon {
+            font-size: 140px;
+            color: rgba(26,26,46,0.2);
+        }
+
+        .about-white {
+            flex: 0 0 60%;
+            background: #fff;
+            color: #1a1a2e;
+            display: flex;
+            align-items: center;
+            padding: 60px;
+        }
+
+        .about-text {
+            font-size: 22px;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .about-text strong {
+            color: #f4a300;
+            font-weight: 900;
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials-section {
+            background: #0f0f23;
+            padding: 100px 60px;
+        }
+
+        .testimonials-headline {
+            font-size: 42px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .testimonials-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            flex: 1;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 40px 30px;
+            border-top: 5px solid #f4a300;
+            text-align: center;
+        }
+
+        .testimonial-amount {
+            font-size: 48px;
+            font-weight: 900;
+            color: #f4a300;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 20px;
+        }
+
+        .testimonial-stars {
+            color: #f4a300;
+            font-size: 18px;
+        }
+
+        /* ===== WHO IS THIS FOR ===== */
+        .who-section {
+            background: #fff;
+            color: #1a1a2e;
+            padding: 100px 60px;
+            position: relative;
+        }
+
+        .who-headline {
+            font-size: 42px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #1a1a2e;
+        }
+
+        .who-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0;
+        }
+
+        .who-col {
+            flex: 1;
+            padding: 50px 40px;
+            border-radius: 16px;
+        }
+
+        .who-yes {
+            background: rgba(39, 174, 96, 0.08);
+            border: 2px solid rgba(39, 174, 96, 0.2);
+            border-radius: 16px 0 0 16px;
+            position: relative;
+        }
+
+        .who-yes::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: #27ae60;
+        }
+
+        .who-no {
+            background: rgba(231, 76, 60, 0.08);
+            border: 2px solid rgba(231, 76, 60, 0.2);
+            border-radius: 0 16px 16px 0;
+            position: relative;
+        }
+
+        .who-no::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 100%;
+            background: #e74c3c;
+        }
+
+        .who-col h3 {
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 24px;
+        }
+
+        .who-yes h3 { color: #27ae60; }
+        .who-no h3 { color: #e74c3c; }
+
+        .who-col ul {
+            list-style: none;
+        }
+
+        .who-col ul li {
+            font-size: 17px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #444;
+        }
+
+        .who-yes li i { color: #27ae60; }
+        .who-no li i { color: #e74c3c; }
+
+        /* ===== FAQ ===== */
+        .faq-section {
+            background: #1a1a2e;
+            padding: 100px 60px;
+        }
+
+        .faq-headline {
+            font-size: 42px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .faq-question {
+            padding: 24px 30px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .faq-icon {
+            color: #f4a300;
+            font-size: 24px;
+            font-weight: 900;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+            margin-right: 16px;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+
+        .faq-answer-inner {
+            padding: 0 30px 24px;
+            font-size: 16px;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* ===== FINAL CTA ===== */
+        .final-cta {
+            display: flex;
+            min-height: 550px;
+        }
+
+        .final-gold {
+            flex: 1;
+            background: linear-gradient(135deg, #f4a300, #ffc107);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            text-align: center;
+        }
+
+        .final-gold h2 {
+            font-size: 42px;
+            font-weight: 900;
+            color: #1a1a2e;
+            margin-bottom: 20px;
+        }
+
+        .final-gold p {
+            font-size: 20px;
+            color: rgba(26,26,46,0.7);
+            margin-bottom: 30px;
+        }
+
+        .final-dark {
+            flex: 1;
+            background: #16213e;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+        }
+
+        .final-form-container {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .final-secure {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #0f0f23;
+            padding: 30px 40px;
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+            }
+
+            .hero-dark {
+                flex: none;
+                padding: 60px 24px;
+            }
+
+            .hero-headline {
+                font-size: 34px;
+            }
+
+            .hero-subheadline {
+                font-size: 16px;
+            }
+
+            .hero-cta {
+                font-size: 18px;
+                padding: 16px 36px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero-gold {
+                flex: none;
+                padding: 40px 24px;
+            }
+
+            .countdown-number {
+                font-size: 30px;
+            }
+
+            .countdown-item {
+                min-width: 60px;
+                padding: 12px 14px;
+            }
+
+            .stats-grid {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .stat-number {
+                font-size: 32px;
+            }
+
+            .problem-section {
+                padding: 80px 24px 60px;
+                clip-path: polygon(0 2%, 100% 0, 100% 100%, 0 100%);
+            }
+
+            .problem-inner {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .problem-icon {
+                flex: none;
+                font-size: 80px;
+                order: -1;
+            }
+
+            .problem-headline {
+                font-size: 30px;
+            }
+
+            .comparison-section {
+                flex-direction: column;
+            }
+
+            .comparison-old, .comparison-new {
+                padding: 50px 24px;
+            }
+
+            .vs-badge {
+                position: relative;
+                top: auto;
+                right: auto;
+                transform: none;
+                margin: -20px auto;
+                z-index: 10;
+            }
+
+            .comparison-new::before {
+                width: 100%;
+                height: 4px;
+                top: 0;
+                right: 0;
+            }
+
+            .discover-section {
+                padding: 80px 24px 60px;
+                clip-path: polygon(0 2%, 100% 0, 100% 100%, 0 100%);
+            }
+
+            .discover-headline {
+                font-size: 30px;
+            }
+
+            .discover-item,
+            .discover-item:nth-child(even) {
+                flex-direction: row;
+                text-align: right;
+            }
+
+            .discover-text {
+                font-size: 16px;
+            }
+
+            .ai-section {
+                padding: 80px 24px;
+            }
+
+            .ai-grid {
+                flex-direction: column;
+            }
+
+            .ai-headline {
+                font-size: 30px;
+            }
+
+            .about-section {
+                flex-direction: column;
+            }
+
+            .about-gold {
+                flex: none;
+                padding: 40px;
+            }
+
+            .about-quote-icon {
+                font-size: 80px;
+            }
+
+            .about-white {
+                flex: none;
+                padding: 40px 24px;
+            }
+
+            .about-text {
+                font-size: 18px;
+            }
+
+            .testimonials-section {
+                padding: 80px 24px;
+            }
+
+            .testimonials-grid {
+                flex-direction: column;
+            }
+
+            .testimonials-headline {
+                font-size: 30px;
+            }
+
+            .testimonial-amount {
+                font-size: 36px;
+            }
+
+            .who-section {
+                padding: 80px 24px;
+            }
+
+            .who-headline {
+                font-size: 30px;
+            }
+
+            .who-grid {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .who-yes {
+                border-radius: 16px;
+            }
+
+            .who-no {
+                border-radius: 16px;
+            }
+
+            .faq-section {
+                padding: 80px 24px;
+            }
+
+            .faq-headline {
+                font-size: 30px;
+            }
+
+            .final-cta {
+                flex-direction: column;
+            }
+
+            .final-gold {
+                padding: 50px 24px;
+            }
+
+            .final-gold h2 {
+                font-size: 30px;
+            }
+
+            .final-dark {
+                padding: 50px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+    <div class="hero-dark">
+        <div class="hero-badge">&#127873; הדרכה חינמית לזמן מוגבל</div>
+        <h1 class="hero-headline">ככה בניתי עסק איקומרס שמייצר הכנסות תוך 30 יום</h1>
+        <p class="hero-subheadline">7 שלבים מדויקים | 19 מיליון דולר מכירות | עכשיו בחינם</p>
+        <a href="#final-cta" class="hero-cta">קבל גישה מיידית &larr;</a>
+    </div>
+    <div class="hero-gold">
+        <div class="countdown-container">
+            <div class="countdown-label">ההצעה נסגרת בעוד:</div>
+            <div class="countdown" id="hero-countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hero-hours">00</div>
+                    <div class="countdown-unit">שעות</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hero-minutes">00</div>
+                    <div class="countdown-unit">דקות</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hero-seconds">00</div>
+                    <div class="countdown-unit">שניות</div>
+                </div>
+            </div>
+            <div class="spots-left">&#128293; נותרו רק 12 מקומות</div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== STATS STRIP ===== -->
+<section class="stats-strip">
+    <div class="stats-grid">
+        <div class="stat-item reveal">
+            <span class="stat-number">150,000+</span>
+            <span class="stat-label">תלמידים</span>
+        </div>
+        <div class="stat-item reveal">
+            <span class="stat-number">$19M+</span>
+            <span class="stat-label">מכירות</span>
+        </div>
+        <div class="stat-item reveal">
+            <span class="stat-number">500+</span>
+            <span class="stat-label">יזמים ישראלים</span>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PROBLEM ===== -->
+<section class="problem-section">
+    <div class="problem-inner">
+        <div class="problem-text">
+            <h2 class="problem-headline reveal">בוא נהיה כנים לרגע...</h2>
+            <div class="pain-bullet reveal">אתה יודע שאתה יכול יותר, אבל משהו עוצר אותך</div>
+            <div class="pain-bullet reveal">ניסית לבד ונתקעת — בלי כיוון, בלי מנטור</div>
+            <div class="pain-bullet reveal">למדת תיאוריה אבל אף אחד לא לימד אותך למכור</div>
+            <div class="pain-bullet reveal">אתה רואה אחרים מצליחים — למה לא אני?</div>
+        </div>
+        <div class="problem-icon reveal">&#10060;</div>
+    </div>
+</section>
+
+<!-- ===== COMPARISON ===== -->
+<section class="comparison-section">
+    <div class="comparison-old">
+        <h3 class="comparison-heading red reveal">&#10060; העולם הישן</h3>
+        <ul class="comparison-list">
+            <li class="reveal"><i class="fas fa-times-circle"></i> לומדים שנים בקורסים תיאורטיים</li>
+            <li class="reveal"><i class="fas fa-times-circle"></i> בונים חנות לבד בלי ליווי</li>
+            <li class="reveal"><i class="fas fa-times-circle"></i> מנסים הכל ומקווים לטוב</li>
+            <li class="reveal"><i class="fas fa-times-circle"></i> תקועים בלי הכנסות</li>
+        </ul>
+    </div>
+    <div class="comparison-new" style="position: relative;">
+        <div class="vs-badge">VS</div>
+        <h3 class="comparison-heading gold reveal">&#10024; העולם החדש</h3>
+        <ul class="comparison-list">
+            <li class="reveal"><i class="fas fa-check-circle"></i> 7 שלבים מעשיים תוך 30 יום</li>
+            <li class="reveal"><i class="fas fa-check-circle"></i> ליווי אישי + קהילה של 500+ יזמים</li>
+            <li class="reveal"><i class="fas fa-check-circle"></i> שיטה מוכחת עם AI לאיקומרס</li>
+            <li class="reveal"><i class="fas fa-check-circle"></i> תלמידים מרוויחים בחודש הראשון</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ===== DISCOVER ===== -->
+<section class="discover-section">
+    <h2 class="discover-headline reveal">מה תגלה בהדרכה?</h2>
+    <div class="discover-items">
+        <div class="discover-item reveal">
+            <div class="discover-number">1</div>
+            <div class="discover-text">למה אנשים פחות חכמים ממך מצליחים יותר</div>
+        </div>
+        <div class="discover-item reveal">
+            <div class="discover-number">2</div>
+            <div class="discover-text">5 ערוצי הרווח שכל ישראלי חייב להכיר</div>
+        </div>
+        <div class="discover-item reveal">
+            <div class="discover-number">3</div>
+            <div class="discover-text">הטריק המסחרי שעומד מאחורי 19 מיליון דולר</div>
+        </div>
+        <div class="discover-item reveal">
+            <div class="discover-number">4</div>
+            <div class="discover-text">איך לגרום לכסף לייצר כסף נוסף</div>
+        </div>
+        <div class="discover-item reveal">
+            <div class="discover-number">5</div>
+            <div class="discover-text">המודל &#x27;אפשרי-בלתי אפשרי&#x27; להכנסות אונליין</div>
+        </div>
+        <div class="discover-item reveal">
+            <div class="discover-number">6</div>
+            <div class="discover-text">4 חסמים מנטליים שמונעים ממך להתחיל</div>
+        </div>
+        <div class="discover-item reveal">
+            <div class="discover-number">7</div>
+            <div class="discover-text">איך AI משנה את המשחק באיקומרס ב-2026</div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== AI SECTION ===== -->
+<section class="ai-section">
+    <h2 class="ai-headline reveal">AI לאיקומרס: <span>הנשק הסודי</span></h2>
+    <div class="ai-grid">
+        <div class="ai-card reveal">
+            <div class="ai-icon">&#127919;</div>
+            <h3>זיהוי מוצרים מנצחים</h3>
+        </div>
+        <div class="ai-card reveal">
+            <div class="ai-icon">&#9997;&#65039;</div>
+            <h3>קופי ומודעות אוטומטיות</h3>
+        </div>
+        <div class="ai-card reveal">
+            <div class="ai-icon">&#128202;</div>
+            <h3>חיסכון 80% בזמן ניהול</h3>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about-section">
+    <div class="about-gold">
+        <div class="about-quote-icon"><i class="fas fa-quote-right"></i></div>
+    </div>
+    <div class="about-white">
+        <p class="about-text reveal"><strong>אביב מלכא</strong> — יזם איקומרס עם מעל 150,000 תלמידים. מכר עשרות מיליוני דולרים. מלווה 500+ יזמים ישראלים לעסקים רווחיים.</p>
+    </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials-section">
+    <h2 class="testimonials-headline reveal">התוצאות מדברות</h2>
+    <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+            <div class="testimonial-amount">&#8362;7,000</div>
+            <p class="testimonial-text">רווח בחודש הראשון. הגעתי בלי שום ידע, וכבר בחודש הראשון הצלחתי.</p>
+            <div class="testimonial-stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+        </div>
+        <div class="testimonial-card reveal">
+            <div class="testimonial-amount">&#8362;27,000</div>
+            <p class="testimonial-text">הכנסות תוך 3 חודשים. ניסיתי לבד ונכשלתי. הליווי עשה את ההבדל.</p>
+            <div class="testimonial-stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+        </div>
+        <div class="testimonial-card reveal">
+            <div class="testimonial-amount">&#8362;118,000</div>
+            <p class="testimonial-text">תוך חצי שנה. בלי הקהילה והליווי — לא הייתי מגיע לשם.</p>
+            <div class="testimonial-stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== WHO IS THIS FOR ===== -->
+<section class="who-section">
+    <h2 class="who-headline reveal">למי ההדרכה מתאימה?</h2>
+    <div class="who-grid">
+        <div class="who-col who-yes reveal">
+            <h3><i class="fas fa-check-circle"></i> ההדרכה בשבילך אם...</h3>
+            <ul>
+                <li><i class="fas fa-check"></i> רוצה עסק דיגיטלי רווחי</li>
+                <li><i class="fas fa-check"></i> מוכן ליישום מיידי</li>
+                <li><i class="fas fa-check"></i> מחפש שיטה מוכחת עם ליווי</li>
+            </ul>
+        </div>
+        <div class="who-col who-no reveal">
+            <h3><i class="fas fa-times-circle"></i> לא בשבילך אם...</h3>
+            <ul>
+                <li><i class="fas fa-times"></i> מחפש &quot;קסם&quot; בלי מאמץ</li>
+                <li><i class="fas fa-times"></i> לא מוכן להשקיע בעצמך</li>
+                <li><i class="fas fa-times"></i> מחפש &quot;קטע מהחיים&quot;</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq-section">
+    <h2 class="faq-headline reveal">שאלות נפוצות</h2>
+    <div class="faq-container">
+        <div class="faq-item reveal">
+            <div class="faq-question">
+                <span>אין לי ידע קודם — זה בשבילי?</span>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">בהחלט. השיטה בנויה מאפס — צעד אחר צעד, בלי הנחות מוקדמות.</div>
+            </div>
+        </div>
+        <div class="faq-item reveal">
+            <div class="faq-question">
+                <span>אין לי זמן</span>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">שעה ביום מספיקה להתחיל. ההדרכה בנויה לאנשים עסוקים.</div>
+            </div>
+        </div>
+        <div class="faq-item reveal">
+            <div class="faq-question">
+                <span>אין לי כסף להשקעה</span>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">אפשר להתחיל עם השקעה מינימלית. ההדרכה חינמית לחלוטין.</div>
+            </div>
+        </div>
+        <div class="faq-item reveal">
+            <div class="faq-question">
+                <span>ניסיתי דרופשיפינג ונכשלתי</span>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">רוב מי שנכשל עבד לבד, בלי שיטה ובלי ליווי. כאן זה שונה.</div>
+            </div>
+        </div>
+        <div class="faq-item reveal">
+            <div class="faq-question">
+                <span>לא יודע אנגלית</span>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">כלי AI עושים הכל — תרגום, כתיבה, שירות לקוחות. אנגלית כבר לא מחסום.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final-cta" id="final-cta">
+    <div class="final-gold">
+        <h2>מוכן לגלות את השיטה?</h2>
+        <p>גישה מיידית — בחינם, לזמן מוגבל</p>
+        <div class="countdown" id="final-countdown">
+            <div class="countdown-item">
+                <div class="countdown-number" id="final-hours">00</div>
+                <div class="countdown-unit">שעות</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="final-minutes">00</div>
+                <div class="countdown-unit">דקות</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="final-seconds">00</div>
+                <div class="countdown-unit">שניות</div>
+            </div>
+        </div>
+    </div>
+    <div class="final-dark">
+        <div class="final-form-container">
+            <script src="https://www.avivmalka.com/forms/2149456993/embed.js"></script>
+        </div>
+        <div class="final-secure">&#128274; מאובטח | נותרו 12 מקומות</div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    &copy; 2026 אביב מלכא — כל הזכויות שמורות
+</footer>
+
+<script>
+    // ===== COUNTDOWN TIMER (48hr, localStorage) =====
+    (function() {
+        var STORAGE_KEY = 'lp3_countdown_end';
+        var stored = localStorage.getItem(STORAGE_KEY);
+        var endTime;
+
+        if (stored && parseInt(stored) > Date.now()) {
+            endTime = parseInt(stored);
+        } else {
+            endTime = Date.now() + 48 * 60 * 60 * 1000;
+            localStorage.setItem(STORAGE_KEY, endTime);
+        }
+
+        function pad(n) { return n < 10 ? '0' + n : n; }
+
+        function updateCountdown() {
+            var remaining = endTime - Date.now();
+            if (remaining <= 0) remaining = 0;
+
+            var hours = Math.floor(remaining / (1000 * 60 * 60));
+            var minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+
+            document.getElementById('hero-hours').textContent = pad(hours);
+            document.getElementById('hero-minutes').textContent = pad(minutes);
+            document.getElementById('hero-seconds').textContent = pad(seconds);
+
+            document.getElementById('final-hours').textContent = pad(hours);
+            document.getElementById('final-minutes').textContent = pad(minutes);
+            document.getElementById('final-seconds').textContent = pad(seconds);
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    })();
+
+    // ===== FAQ ACCORDION =====
+    document.querySelectorAll('.faq-question').forEach(function(q) {
+        q.addEventListener('click', function() {
+            var item = this.parentElement;
+            var isActive = item.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('active'); });
+            if (!isActive) item.classList.add('active');
+        });
+    });
+
+    // ===== SCROLL REVEAL (IntersectionObserver) =====
+    (function() {
+        var reveals = document.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window) {
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            reveals.forEach(function(el) { observer.observe(el); });
+        } else {
+            reveals.forEach(function(el) { el.classList.add('visible'); });
+        }
+    })();
+</script>
+
+</body>
+</html>

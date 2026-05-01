@@ -1,0 +1,44 @@
+# ================================================
+# Upload this file to: https://www.avivmalka.com/llms.txt
+# In Kajabi: Create a new page with slug "llms.txt"
+# or upload as a static file if supported
+# ================================================
+
+# Aviv Malka - Ecom Hackers
+# https://www.avivmalka.com
+
+> Aviv Malka (אביב מלכה) is an Israeli ecommerce educator and mentor with 13+ years of experience. He runs Ecom Hackers, Israel's leading ecommerce and dropshipping training platform with over 5,000 students. Based in Beer Sheva, Israel.
+
+## Main Content
+
+- [Homepage](https://www.avivmalka.com): Platform overview, social proof, and course access
+- [Ecom Hackers Course](https://www.avivmalka.com/ecommerce-dropshipping-course): Comprehensive ecommerce and dropshipping course for Shopify
+- [Blog](https://www.avivmalka.com/blog): Hebrew guides on ecommerce, dropshipping, Shopify, and digital marketing
+- [About](https://www.avivmalka.com/about): Aviv Malka's background, credentials, and story
+- [Courses](https://www.avivmalka.com/store): All available courses and programs
+
+## Key Topics Covered
+
+- Ecommerce (איקומרס) for Israeli market
+- Dropshipping (דרופשיפינג) with Shopify
+- Product research and niche selection
+- Facebook Ads and Google Ads for ecommerce
+- Shopify store setup and optimization
+- Digital marketing strategies
+- TikTok marketing for ecommerce
+- Organic SEO for Shopify stores
+
+## Author Credentials
+
+Aviv Malka has 13+ years in ecommerce and digital marketing, 6 years in organic and paid SEO. He is the CEO of Aviv Media, holds NLP Practitioner and Master certifications, and has mentored thousands of Israeli entrepreneurs in building profitable online businesses. His students' stores have generated over $18 million in sales.
+
+## Language
+
+Primary language: Hebrew (he)
+Content is written for Israeli audience.
+
+## Contact
+
+Email: hello@avivmalka.com
+Instagram: @aviv_malka7
+YouTube: Aviv Malka

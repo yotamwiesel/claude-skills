@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שאלון התאמה - איקומרס</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Heebo', sans-serif;
+  background: #fff;
+  color: #1a1a2e;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Progress Bar */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background: linear-gradient(90deg, #1a1a2e, #3a3a5e);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 100;
+}
+
+/* Question Counter */
+.question-counter {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  font-size: 14px;
+  color: #999;
+  z-index: 100;
+  font-weight: 400;
+}
+
+/* Navigation */
+.nav-buttons {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  gap: 8px;
+  z-index: 100;
+}
+
+.nav-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  border: none;
+  background: #1a1a2e;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  opacity: 0.9;
+}
+
+.nav-btn:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Slides Container */
+.slides-container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+  visibility: visible;
+}
+
+.slide.exit-up {
+  opacity: 0;
+  transform: translateY(-40px);
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.slide-content {
+  max-width: 620px;
+  width: 100%;
+  text-align: right;
+}
+
+/* Question Number */
+.q-number {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #1a1a2e;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.q-arrow {
+  font-size: 12px;
+  color: #1a1a2e;
+}
+
+/* Question Text */
+.q-text {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 8px;
+  color: #1a1a2e;
+}
+
+.q-required {
+  color: #e74c3c;
+  font-size: 20px;
+  margin-right: 4px;
+}
+
+.q-description {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 32px;
+  font-style: italic;
+}
+
+/* Text Input */
+.text-input {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #e0e0e0;
+  padding: 12px 0;
+  font-size: 20px;
+  font-family: 'Heebo', sans-serif;
+  color: #1a1a2e;
+  background: transparent;
+  outline: none;
+  transition: border-color 0.3s;
+  text-align: right;
+  direction: rtl;
+}
+
+.text-input:focus {
+  border-bottom-color: #1a1a2e;
+}
+
+.text-input::placeholder {
+  color: #ccc;
+  font-size: 18px;
+}
+
+/* Phone Input */
+.phone-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  direction: ltr;
+}
+
+.phone-flag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #666;
+  white-space: nowrap;
+}
+
+.phone-input {
+  flex: 1;
+  border: none;
+  border-bottom: 2px solid #e0e0e0;
+  padding: 12px 0;
+  font-size: 20px;
+  font-family: 'Heebo', sans-serif;
+  color: #1a1a2e;
+  background: transparent;
+  outline: none;
+  transition: border-color 0.3s;
+  direction: ltr;
+  text-align: left;
+}
+
+.phone-input:focus {
+  border-bottom-color: #1a1a2e;
+}
+
+.phone-input::placeholder {
+  color: #ccc;
+  font-size: 18px;
+}
+
+/* Multiple Choice */
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.choice-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.25s;
+  text-align: right;
+  direction: rtl;
+  width: 100%;
+  font-family: 'Heebo', sans-serif;
+}
+
+.choice-btn:hover {
+  border-color: #1a1a2e;
+  background: #fafafa;
+}
+
+.choice-btn.selected {
+  border-color: #1a1a2e;
+  background: #f0f0f8;
+}
+
+.choice-letter {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #666;
+  flex-shrink: 0;
+  transition: all 0.25s;
+}
+
+.choice-btn.selected .choice-letter {
+  background: #1a1a2e;
+  color: #fff;
+  border-color: #1a1a2e;
+}
+
+.choice-text {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #1a1a2e;
+  font-weight: 400;
+}
+
+/* OK / Submit Button */
+.ok-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  padding: 12px 28px;
+  background: #1a1a2e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: 'Heebo', sans-serif;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.ok-btn:hover {
+  background: #2a2a4e;
+  transform: translateY(-1px);
+}
+
+.ok-btn .enter-hint {
+  font-size: 12px;
+  opacity: 0.6;
+  font-weight: 400;
+}
+
+/* Thank You Slide */
+.thankyou-content {
+  text-align: center;
+  max-width: 560px;
+}
+
+.thankyou-icon {
+  font-size: 56px;
+  margin-bottom: 20px;
+  animation: bounceIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.thankyou-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: #1a1a2e;
+}
+
+.thankyou-sub {
+  font-size: 18px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 40px;
+  background: #25D366;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: 'Heebo', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.whatsapp-btn:hover {
+  background: #1fb855;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35);
+}
+
+.whatsapp-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: #fff;
+}
+
+/* Keyboard hint */
+.key-hint {
+  position: fixed;
+  bottom: 34px;
+  left: 30px;
+  font-size: 13px;
+  color: #bbb;
+  z-index: 100;
+}
+
+.key-hint kbd {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'Heebo', sans-serif;
+  border: 1px solid #ddd;
+  margin: 0 2px;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .q-text { font-size: 20px; }
+  .text-input, .phone-input { font-size: 18px; }
+  .choice-text { font-size: 15px; }
+  .nav-buttons { bottom: 20px; right: 20px; }
+  .key-hint { display: none; }
+  .slide { padding: 30px 20px; }
+  .thankyou-title { font-size: 26px; }
+  .question-counter { right: 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<div class="question-counter" id="questionCounter"></div>
+
+<div class="nav-buttons">
+  <button class="nav-btn" id="btnUp" onclick="goBack()" disabled>&#9650;</button>
+  <button class="nav-btn" id="btnDown" onclick="goNext()">&#9660;</button>
+</div>
+
+<div class="key-hint" id="keyHint">
+  לחץ <kbd>Enter</kbd> ↵ להמשך
+</div>
+
+<div class="slides-container" id="slidesContainer">
+
+  <!-- Q1 -->
+  <div class="slide active" data-index="0">
+    <div class="slide-content">
+      <div class="q-number">1 <span class="q-arrow">←</span></div>
+      <div class="q-text">מה שמך המלא? <span class="q-required">*</span></div>
+      <div class="q-description">Description (optional)</div>
+      <input type="text" class="text-input" id="q1" placeholder="שם פרטי" data-required="true">
+      <br>
+      <button class="ok-btn" onclick="goNext()">אוקיי <span class="enter-hint">Enter ↵</span></button>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="slide" data-index="1">
+    <div class="slide-content">
+      <div class="q-number">2 <span class="q-arrow">←</span></div>
+      <div class="q-text">מספר פלאפון (חובה)? <span class="q-required">*</span></div>
+      <div class="q-description">Description (optional)</div>
+      <div class="phone-wrapper">
+        <div class="phone-flag">
+          <span>🇮🇱</span>
+          <span>+972</span>
+        </div>
+        <input type="tel" class="phone-input" id="q2" placeholder="050-234-5678" data-required="true">
+      </div>
+      <br>
+      <button class="ok-btn" onclick="goNext()">אוקיי <span class="enter-hint">Enter ↵</span></button>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="slide" data-index="2">
+    <div class="slide-content">
+      <div class="q-number">3 <span class="q-arrow">←</span></div>
+      <div class="q-text">מה גילך המלא? <span class="q-required">*</span></div>
+      <div class="q-description">Description (optional)</div>
+      <input type="text" class="text-input" id="q3" placeholder="הקלד את תשובתך כאן..." data-required="true">
+      <br>
+      <button class="ok-btn" onclick="goNext()">אוקיי <span class="enter-hint">Enter ↵</span></button>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="slide" data-index="3">
+    <div class="slide-content">
+      <div class="q-number">4 <span class="q-arrow">←</span></div>
+      <div class="q-text">האם צפית בתכנים שלי בעבר? <span class="q-required">*</span></div>
+      <div class="q-description">Description (optional)</div>
+      <div class="choices" data-question="q4">
+        <button class="choice-btn" onclick="selectChoice(this, 'q4')" data-value="כן צפיתי">
+          <span class="choice-letter">A</span>
+          <span class="choice-text">כן צפיתי</span>
+        </button>
+        <button class="choice-btn" onclick="selectChoice(this, 'q4')" data-value="עדיין לא">
+          <span class="choice-letter">B</span>
+          <span class="choice-text">עדיין לא</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="slide" data-index="4">
+    <div class="slide-content">
+      <div class="q-number">5 <span class="q-arrow">←</span></div>
+      <div class="q-text">מה רמת הניסיון שלך באיקומרס ודרופשיפינג? <span class="q-required">*</span></div>
+      <div class="q-description">Description (optional)</div>
+      <div class="choices" data-question="q5">
+        <button class="choice-btn" onclick="selectChoice(this, 'q5')" data-value="מתחיל ולא מבין על התחום">
+          <span class="choice-letter">A</span>
+          <span class="choice-text">מתחיל ולא מבין על התחום</span>
+        </button>
+        <button class="choice-btn" onclick="selectChoice(this, 'q5')" data-value="מכיר את התחום ורוצה להתחיל לעבוד">
+          <span class="choice-letter">B</span>
+          <span class="choice-text">מכיר את התחום ורוצה להתחיל לעבוד</span>
+        </button>
+        <button class="choice-btn" onclick="selectChoice(this, 'q5')" data-value="יש לי חנות אבל אני לא מכניס כסף">
+          <span class="choice-letter">C</span>
+          <span class="choice-text">יש לי חנות אבל אני לא מכניס כסף</span>
+        </button>
+        <button class="choice-btn" onclick="selectChoice(this, 'q5')" data-value="יש לי חנות מרוויחה אבל אני רוצה יותר לפרוץ">
+          <span class="choice-letter">D</span>
+          <span class="choice-text">יש לי חנות מרוויחה אבל אני רוצה יותר לפרוץ</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="slide" data-index="5">
+    <div class="slide-content">
+      <div class="q-number">6 <span class="q-arrow">←</span></div>
+      <div class="q-text">איך אתם מרגישים היום לגבי העבודה והמצב הכלכלי שלכם? <span class="q-required">*</span></div>
+      <div class="q-description">Description (optional)</div>
+      <div class="choices" data-question="q6">
+        <button class="choice-btn" onclick="selectChoice(this, 'q6')" data-value="מרגיש שעובד קשה מדי בשביל תוצאה שלא באמת משתלמת">
+          <span class="choice-letter">A</span>
+          <span class="choice-text">מרגיש שעובד קשה מדי בשביל תוצאה שלא באמת משתלמת</span>
+        </button>
+        <button class="choice-btn" onclick="selectChoice(this, 'q6')" data-value="מרוויח סביר. אבל יודע שאני מסוגל להרבה יותר">
+          <span class="choice-letter">B</span>
+          <span class="choice-text">מרוויח סביר. אבל יודע שאני מסוגל להרבה יותר</span>
+        </button>
+        <button class="choice-btn" onclick="selectChoice(this, 'q6')" data-value="מרגיש תקוע. אותו חודש חוזר על עצמו בלי שינוי">
+          <span class="choice-letter">C</span>
+          <span class="choice-text">מרגיש תקוע. אותו חודש חוזר על עצמו בלי שינוי</span>
+        </button>
+        <button class="choice-btn" onclick="selectChoice(this, 'q6')" data-value="בסך הכל בסדר. אבל מחפש דרך חכמה לבנות נכס נוסף מהצד">
+          <span class="choice-letter">D</span>
+          <span class="choice-text">בסך הכל בסדר. אבל מחפש דרך חכמה לבנות נכס נוסף מהצד</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="slide" data-index="6">
+    <div class="slide-content">
+      <div class="q-number">7 <span class="q-arrow">←</span></div>
+      <div class="q-text">אם תהיה לכם דרך ברורה לבנות נכס איקומרס צעד צעד, איך אתם מרגישים לגבי לעשות צעד ראשון? <span class="q-required">*</span></div>
+      <div class="q-description">Description (optional)</div>
+      <div class="choices" data-question="q7">
+        <button class="choice-btn" onclick="selectChoice(this, 'q7')" data-value="חד משמעית מוכן להתחיל. אני רוצה לשמוע איך עושים את זה נכון">
+          <span class="choice-letter">A</span>
+          <span class="choice-text">חד משמעית מוכן להתחיל. אני רוצה לשמוע איך עושים את זה נכון</span>
+        </button>
+        <button class="choice-btn" onclick="selectChoice(this, 'q7')" data-value="כמעט מוכן. צריך להבין עוד כמה פרטים ואז זז קדימה">
+          <span class="choice-letter">B</span>
+          <span class="choice-text">כמעט מוכן. צריך להבין עוד כמה פרטים ואז זז קדימה</span>
+        </button>
+        <button class="choice-btn" onclick="selectChoice(this, 'q7')" data-value="קצת חושש. אבל מרגיש שזו תקופה שאני חייב לעשות שינוי">
+          <span class="choice-letter">C</span>
+          <span class="choice-text">קצת חושש. אבל מרגיש שזו תקופה שאני חייב לעשות שינוי</span>
+        </button>
+        <button class="choice-btn" onclick="selectChoice(this, 'q7')" data-value="רוצה בהירות. קודם להבין אם זה בכלל מתאים לי ואז להחליט">
+          <span class="choice-letter">D</span>
+          <span class="choice-text">רוצה בהירות. קודם להבין אם זה בכלל מתאים לי ואז להחליט</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="slide" data-index="7">
+    <div class="slide-content">
+      <div class="q-number">8 <span class="q-arrow">←</span></div>
+      <div class="q-text">מה הם הדברים העיקריים שאתם מרגישים שחסר לכם היום כדי שתוכלו להקים את החנות שלכם? <span class="q-required">*</span></div>
+      <div class="q-description">Description (optional)</div>
+      <input type="text" class="text-input" id="q8" placeholder="הקלד את תשובתך כאן..." data-required="true">
+      <br>
+      <button class="ok-btn" onclick="goNext()">אוקיי <span class="enter-hint">Enter ↵</span></button>
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="slide" data-index="8">
+    <div class="slide-content">
+      <div class="q-number">9 <span class="q-arrow">←</span></div>
+      <div class="q-text"><span class="q-required">*</span>מה מצבך הכלכלי הנוכחי? בגלל שזה עסק לכל דבר נשמח לתשובה כנה<span class="q-required">*</span></div>
+      <div class="q-description">Description (optional)</div>
+      <div class="choices" data-question="q9">
+        <button class="choice-btn" onclick="selectChoice(this, 'q9')" data-value="יש לי חיסכון של מתחת ל 10,000">
+          <span class="choice-letter">A</span>
+          <span class="choice-text">יש לי חיסכון של מתחת ל 10,000</span>
+        </button>
+        <button class="choice-btn" onclick="selectChoice(this, 'q9')" data-value="יש לי חיסכון של מעל 10,000">
+          <span class="choice-letter">B</span>
+          <span class="choice-text">יש לי חיסכון של מעל 10,000</span>
+        </button>
+        <button class="choice-btn" onclick="selectChoice(this, 'q9')" data-value="אני יכול לעמוד בתשלומים של 600-1500">
+          <span class="choice-letter">C</span>
+          <span class="choice-text">אני יכול לעמוד בתשלומים של 600-1500</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="slide" data-index="9">
+    <div class="slide-content">
+      <div class="q-number">10 <span class="q-arrow">←</span></div>
+      <div class="q-text"><span class="q-required">*</span>במידה ונתחיל יחד, עד כמה את/ה מחוייב/ת לתת את כולך להתחלת התהליך ולהצליח בו?<span class="q-required">*</span></div>
+      <div class="q-description">Description (optional)</div>
+      <div class="choices" data-question="q10">
+        <button class="choice-btn" onclick="selectChoice(this, 'q10')" data-value="אני רוצה מאוד להתחיל כבר ולקבוע שיחת התאמה להתחלת התהליך!">
+          <span class="choice-letter">A</span>
+          <span class="choice-text">אני רוצה מאוד להתחיל כבר ולקבוע שיחת התאמה להתחלת התהליך!</span>
+        </button>
+        <button class="choice-btn" onclick="selectChoice(this, 'q10')" data-value="80% בפנים חסר לי להבין שזה בשבילי ואני מוכה/ה להתקדם">
+          <span class="choice-letter">B</span>
+          <span class="choice-text">80% בפנים חסר לי להבין שזה בשבילי ואני מוכה/ה להתקדם</span>
+        </button>
+        <button class="choice-btn" onclick="selectChoice(this, 'q10')" data-value="עדיין אל סגור על עצמי שאני מוכן לעשות צעד ולהתקדם">
+          <span class="choice-letter">C</span>
+          <span class="choice-text">עדיין אל סגור על עצמי שאני מוכן לעשות צעד ולהתקדם</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thank You -->
+  <div class="slide" data-index="10">
+    <div class="slide-content thankyou-content">
+      <div class="thankyou-icon">🎉</div>
+      <div class="thankyou-title">תודה שמילאת את השאלון!</div>
+      <div class="thankyou-sub">קיבלנו את הפרטים שלך.<br>לחץ על הכפתור כדי להתחיל שיחה איתנו בוואטסאפ</div>
+      <a class="whatsapp-btn" id="whatsappLink" href="#" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        שלחו לנו הודעה בוואטסאפ
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const TOTAL_QUESTIONS = 10;
+let currentSlide = 0;
+const answers = {};
+const slides = document.querySelectorAll('.slide');
+
+function updateUI() {
+  const progress = ((currentSlide) / TOTAL_QUESTIONS) * 100;
+  document.getElementById('progressBar').style.width = progress + '%';
+
+  if (currentSlide < TOTAL_QUESTIONS) {
+    document.getElementById('questionCounter').textContent = (currentSlide + 1) + ' מתוך ' + TOTAL_QUESTIONS;
+    document.getElementById('questionCounter').style.display = '';
+  } else {
+    document.getElementById('questionCounter').style.display = 'none';
+  }
+
+  document.getElementById('btnUp').disabled = currentSlide === 0;
+  document.getElementById('btnDown').style.display = currentSlide >= TOTAL_QUESTIONS ? 'none' : '';
+  document.getElementById('keyHint').style.display = currentSlide >= TOTAL_QUESTIONS ? 'none' : '';
+
+  if (currentSlide >= TOTAL_QUESTIONS) {
+    document.querySelector('.nav-buttons').style.display = 'none';
+  }
+}
+
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.remove('active', 'exit-up');
+    if (i < index) slide.classList.add('exit-up');
+  });
+  slides[index].classList.add('active');
+
+  setTimeout(() => {
+    const input = slides[index].querySelector('input');
+    if (input) input.focus();
+  }, 400);
+
+  updateUI();
+}
+
+function validateCurrent() {
+  const slide = slides[currentSlide];
+  const input = slide.querySelector('input');
+  if (input && input.dataset.required === 'true') {
+    if (!input.value.trim()) {
+      input.style.borderBottomColor = '#e74c3c';
+      input.focus();
+      setTimeout(() => { input.style.borderBottomColor = ''; }, 1500);
+      return false;
+    }
+  }
+
+  const choicesContainer = slide.querySelector('.choices');
+  if (choicesContainer) {
+    const qKey = choicesContainer.dataset.question;
+    if (!answers[qKey]) {
+      choicesContainer.querySelectorAll('.choice-btn').forEach(btn => {
+        btn.style.borderColor = '#e74c3c';
+        setTimeout(() => { btn.style.borderColor = ''; }, 1500);
+      });
+      return false;
+    }
+  }
+
+  if (input) answers[input.id] = input.value.trim();
+  return true;
+}
+
+function goNext() {
+  if (currentSlide >= TOTAL_QUESTIONS) return;
+  if (!validateCurrent()) return;
+  currentSlide++;
+
+  if (currentSlide === TOTAL_QUESTIONS) {
+    buildWhatsAppLink();
+    document.getElementById('progressBar').style.width = '100%';
+  }
+  showSlide(currentSlide);
+}
+
+function goBack() {
+  if (currentSlide <= 0) return;
+  currentSlide--;
+  showSlide(currentSlide);
+}
+
+function selectChoice(btn, questionKey) {
+  const parent = btn.closest('.choices');
+  parent.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  answers[questionKey] = btn.dataset.value;
+  setTimeout(() => goNext(), 400);
+}
+
+function buildWhatsAppLink() {
+  const phone = '972525535537';
+  let message = 'היי, מילאתי את השאלון 👋\n\n';
+  message += 'שם: ' + (answers['q1'] || '') + '\n';
+  message += 'טלפון: ' + (answers['q2'] || '') + '\n';
+  message += 'גיל: ' + (answers['q3'] || '') + '\n';
+  message += 'צפה בתכנים: ' + (answers['q4'] || '') + '\n';
+  message += 'ניסיון: ' + (answers['q5'] || '') + '\n';
+  message += 'תחושה כלכלית: ' + (answers['q6'] || '') + '\n';
+  message += 'מוכנות לצעד ראשון: ' + (answers['q7'] || '') + '\n';
+  message += 'מה חסר: ' + (answers['q8'] || '') + '\n';
+  message += 'מצב כלכלי: ' + (answers['q9'] || '') + '\n';
+  message += 'מחוייבות: ' + (answers['q10'] || '') + '\n';
+  document.getElementById('whatsappLink').href = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(message);
+
+  // Send email via FormSubmit
+  sendEmail();
+  // Send to Make.com webhook
+  sendToMake();
+}
+
+function sendEmail() {
+  const data = {
+    _subject: 'ליד חדש מהשאלון! - ' + (answers['q1'] || ''),
+    'שם': answers['q1'] || '',
+    'טלפון': answers['q2'] || '',
+    'גיל': answers['q3'] || '',
+    'צפה בתכנים': answers['q4'] || '',
+    'ניסיון באיקומרס': answers['q5'] || '',
+    'תחושה כלכלית': answers['q6'] || '',
+    'מוכנות לצעד ראשון': answers['q7'] || '',
+    'מה חסר': answers['q8'] || '',
+    'מצב כלכלי': answers['q9'] || '',
+    'מחוייבות': answers['q10'] || '',
+    _template: 'table'
+  };
+
+  fetch('https://formsubmit.co/ajax/aviv1988@gmail.com', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(data)
+  }).catch(() => {});
+}
+
+function sendToMake() {
+  const data = {
+    name: answers['q1'] || '',
+    phone: answers['q2'] || '',
+    age: answers['q3'] || '',
+    watched_content: answers['q4'] || '',
+    experience: answers['q5'] || '',
+    financial_feeling: answers['q6'] || '',
+    first_step: answers['q7'] || '',
+    whats_missing: answers['q8'] || '',
+    financial_status: answers['q9'] || '',
+    commitment: answers['q10'] || '',
+    timestamp: new Date().toLocaleString('he-IL')
+  };
+
+  fetch('https://hook.eu2.make.com/k6jjho2j6ourfgan7gbwmnqp8g4x4od1', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).catch(() => {});
+}
+
+// Keyboard
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { e.preventDefault(); goNext(); }
+  if (e.key === 'ArrowUp') { e.preventDefault(); goBack(); }
+  if (e.key === 'ArrowDown') { e.preventDefault(); goNext(); }
+
+  const slide = slides[currentSlide];
+  const choicesContainer = slide ? slide.querySelector('.choices') : null;
+  if (choicesContainer) {
+    const map = { 'a': 0, 'b': 1, 'c': 2, 'd': 3 };
+    const idx = map[e.key.toLowerCase()];
+    if (idx !== undefined) {
+      const btns = choicesContainer.querySelectorAll('.choice-btn');
+      if (btns[idx]) btns[idx].click();
+    }
+  }
+});
+
+// Mouse wheel
+let wheelLock = false;
+document.addEventListener('wheel', (e) => {
+  if (wheelLock) return;
+  wheelLock = true;
+  setTimeout(() => { wheelLock = false; }, 800);
+  if (e.deltaY > 0) goNext(); else if (e.deltaY < 0) goBack();
+});
+
+// Touch swipe
+let touchStartY = 0;
+document.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; });
+document.addEventListener('touchend', (e) => {
+  const diff = touchStartY - e.changedTouches[0].clientY;
+  if (Math.abs(diff) > 50) { if (diff > 0) goNext(); else goBack(); }
+});
+
+// Init
+updateUI();
+slides[0].querySelector('input').focus();
+</script>
+
+</body>
+</html>

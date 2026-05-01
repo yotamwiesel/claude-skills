@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>NOMAD CORE - ארנק כרטיסים מינימליסטי | RESPIRA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Heebo',sans-serif;background:#fff;color:#1a1a1a;direction:rtl;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}img{max-width:100%;height:auto;display:block}button{cursor:pointer;border:none;font-family:inherit;background:none}ul{list-style:none}
+:root{--p:#1a1a1a;--a:#c0392b;--g:#27ae60;--bg:#f5f5f5;--b:#e0e0e0;--m:#666;--w:1100px;--r:10px}
+
+/* PROMO */
+.promo{background:var(--p);color:#fff;text-align:center;padding:10px 16px;font-size:13px;font-weight:500}.promo b{color:#f1c40f}
+/* HEADER */
+.hdr{background:#fff;border-bottom:1px solid var(--b);padding:12px 16px;position:sticky;top:0;z-index:100}.hdr-in{max-width:var(--w);margin:0 auto;display:flex;align-items:center;justify-content:space-between}.logo{font-size:24px;font-weight:900;letter-spacing:3px;text-transform:uppercase}.nav{display:flex;gap:24px}.nav a{font-size:14px;font-weight:500;color:#333}.nav a:hover{color:var(--a)}.cart-b{position:relative;padding:0}.cart-b svg{width:22px;height:22px}.cart-d{position:absolute;top:-5px;left:-5px;background:var(--a);color:#fff;width:16px;height:16px;border-radius:50%;font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:700}
+/* TRUST */
+.trust{background:var(--bg);padding:10px 16px;display:flex;justify-content:center;gap:32px;font-size:12px;color:var(--m);border-bottom:1px solid var(--b);flex-wrap:wrap}.trust span{display:flex;align-items:center;gap:5px}.trust svg{width:14px;height:14px;color:var(--g);flex-shrink:0}
+/* HERO */
+.hero{max-width:var(--w);margin:0 auto;padding:24px 16px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.gal-main{width:100%;aspect-ratio:1;background:var(--bg);border-radius:var(--r);overflow:hidden;position:relative}.gal-main img{width:100%;height:100%;object-fit:cover}.badge{position:absolute;top:12px;right:12px;background:var(--a);color:#fff;padding:5px 12px;border-radius:16px;font-size:12px;font-weight:700;z-index:2}
+.thumbs{display:flex;gap:6px;margin-top:10px;overflow-x:auto;-webkit-overflow-scrolling:touch}.thumb{width:60px;height:60px;border-radius:6px;overflow:hidden;border:2px solid transparent;cursor:pointer;flex-shrink:0;background:var(--bg)}.thumb.active,.thumb:hover{border-color:var(--p)}.thumb img{width:100%;height:100%;object-fit:cover}
+.info h1{font-size:28px;font-weight:800;line-height:1.3;margin-bottom:6px}.info .sub{font-size:15px;color:var(--m);margin-bottom:14px}.rate{display:flex;align-items:center;gap:6px;margin-bottom:14px;font-size:14px}.rate .st{color:#f1c40f;letter-spacing:1px}.rate .ct{color:var(--m)}
+.pr{display:flex;align-items:baseline;gap:10px;margin-bottom:16px}.pr-now{font-size:32px;font-weight:800}.pr-was{font-size:18px;color:#999;text-decoration:line-through}.pr-tag{font-size:13px;color:var(--a);font-weight:700;background:#ffeaea;padding:3px 10px;border-radius:6px}
+.stk{display:inline-flex;align-items:center;gap:5px;background:#fff3cd;color:#856404;padding:7px 12px;border-radius:6px;font-size:12px;font-weight:600;margin-bottom:14px}
+.vg{margin-bottom:18px}.vl{font-size:14px;font-weight:600;margin-bottom:8px}.colors{display:flex;gap:8px;flex-wrap:wrap}.cb{padding:9px 16px;border:2px solid var(--b);border-radius:8px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;transition:.2s}.cb:hover{border-color:#999}.cb.act{border-color:var(--p);background:var(--p);color:#fff}.cb.out{opacity:.35;cursor:not-allowed;text-decoration:line-through}.dot{width:14px;height:14px;border-radius:50%;border:1px solid rgba(0,0,0,.12)}
+.qr{display:flex;align-items:center;gap:12px;margin-bottom:16px;font-size:14px;font-weight:600}.qw{display:flex;border:2px solid var(--b);border-radius:8px;overflow:hidden}.qw button{width:38px;height:38px;background:var(--bg);font-size:18px;font-weight:600;display:flex;align-items:center;justify-content:center}.qw input{width:44px;text-align:center;border:none;font-size:15px;font-weight:700;background:#fff;font-family:inherit}
+.cta{display:block;width:100%;padding:16px;background:var(--p);color:#fff;font-size:18px;font-weight:700;border-radius:10px;text-align:center;transition:.25s;margin-bottom:10px}.cta:hover{background:#333;transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,.18)}
+.sec-txt{text-align:center;font-size:12px;color:var(--m);margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:4px}.sec-txt svg{width:13px;height:13px}
+
+/* PAYMENT LOGOS (big, below CTA) */
+.pay-big{padding:20px 0;text-align:center}
+.pay-big h3{font-size:20px;font-weight:800;margin-bottom:16px}
+.pay-logos{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.pay-logo{width:80px;height:50px;background:#fff;border:1.5px solid var(--b);border-radius:10px;display:flex;align-items:center;justify-content:center;transition:.2s}
+.pay-logo:hover{border-color:#999;transform:translateY(-2px)}
+.pay-logo svg{max-width:48px;max-height:28px}
+.pay-logo span{font-weight:800;font-size:14px}
+
+/* BADGES */
+.bdg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}.bdg-c{text-align:center;padding:14px 8px;background:var(--bg);border-radius:8px}.bdg-c svg{width:28px;height:28px;margin:0 auto 6px;color:var(--p)}.bdg-c span{font-size:12px;font-weight:600;line-height:1.4;display:block}
+
+/* HERO BANNER */
+.hb{padding:48px 16px 0;text-align:center}
+.hb .guar{display:inline-block;border:2px solid var(--p);border-radius:30px;padding:8px 28px;font-size:15px;font-weight:700;margin-bottom:24px}
+.hb-card{background:var(--p);border-radius:24px;padding:48px 32px 40px;max-width:900px;margin:0 auto 20px;position:relative;overflow:hidden}
+.hb-card::before{content:'';position:absolute;top:-60px;left:-60px;width:200px;height:200px;background:rgba(255,255,255,.03);border-radius:50%}
+.hb-card h2{font-size:38px;font-weight:900;color:#fff;margin-bottom:12px;letter-spacing:1px;position:relative;z-index:1}
+.hb-card .pill{display:inline-block;background:#fff;color:var(--p);padding:10px 36px;border-radius:30px;font-size:18px;font-weight:700;margin-bottom:36px;position:relative;z-index:1}
+.hbf{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;position:relative;z-index:1}
+.hbf-c{background:#fff;border-radius:16px;padding:28px 16px 24px;text-align:center;transition:transform .3s}
+.hbf-c:hover{transform:translateY(-4px)}
+.hbf-c svg{width:52px;height:52px;margin:0 auto 14px;color:var(--p)}
+.hbf-c span{font-size:14px;font-weight:700;line-height:1.5;display:block;color:var(--p)}
+.urg{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:700;color:var(--a);margin-top:20px}
+.urg-dot{width:10px;height:10px;background:var(--a);border-radius:50%;animation:blink 1.2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* SECRET / BEFORE-AFTER */
+.secret{padding:0 16px 56px}
+.secret-in{max-width:var(--w);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:center}
+.secret-imgs{display:grid;grid-template-columns:1fr 1fr;position:relative;border-radius:16px;overflow:hidden}
+.secret-img{aspect-ratio:3/4;background:#e0e0e0;position:relative;overflow:hidden}
+.secret-img img{width:100%;height:100%;object-fit:cover}
+.secret-img .label{position:absolute;top:12px;padding:6px 16px;font-size:13px;font-weight:700;color:#fff;z-index:2}
+.secret-img .label.before{right:12px;background:#3d7ab5}
+.secret-img .label.after{left:12px;background:#3d7ab5}
+.secret-img:first-child{border-left:2px solid #fff}
+.secret-arrows{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;gap:4px;z-index:3}
+.secret-arrows span{width:28px;height:28px;background:rgba(0,0,0,.5);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px}
+.secret-body{padding:0 40px}
+.secret-body h2{font-size:32px;font-weight:900;margin-bottom:20px;line-height:1.2}
+.secret-body h2 span{display:block;font-size:16px;font-weight:500;color:var(--m);margin-top:4px}
+.secret-points{display:flex;flex-direction:column;gap:16px}
+.secret-point strong{display:block;font-size:15px;font-weight:700;margin-bottom:2px}
+.secret-point p{font-size:14px;color:var(--m);line-height:1.6}
+
+/* SPECS */
+.specs{background:var(--p);color:#fff;padding:24px 16px}.specs-in{max-width:var(--w);margin:0 auto;display:flex;justify-content:center;gap:48px;flex-wrap:wrap}.spec{text-align:center}.spec strong{font-size:24px;font-weight:800;display:block}.spec small{font-size:12px;opacity:.7}
+
+/* SECTIONS */
+.sec{padding:48px 16px}.sec-in{max-width:var(--w);margin:0 auto}.sec h2{font-size:28px;font-weight:800;text-align:center;margin-bottom:32px;line-height:1.3}
+
+/* PROBLEM/SOLUTION */
+.ps{background:#fff;padding:56px 16px}.ps-in{max-width:800px;margin:0 auto}
+.ps-cols{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.ps-hdr{display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--b)}.ps-hdr svg{width:28px;height:28px;flex-shrink:0}.ps-hdr.bad svg{color:var(--a)}.ps-hdr.good svg{color:var(--g)}.ps-hdr h3{font-size:20px;font-weight:800}
+.psl{text-align:right}.psl li{padding:12px 0;font-size:15px;display:flex;align-items:flex-start;gap:10px;border-bottom:1px solid rgba(0,0,0,.06)}.psl li:last-child{border:none}.psl li svg{width:20px;height:20px;flex-shrink:0;margin-top:2px}.psl.bad li svg{color:var(--a)}.psl.good li svg{color:var(--g)}
+
+/* TESTIMONIAL */
+.testi{max-width:640px;margin:0 auto;background:var(--bg);border-radius:16px;padding:32px 24px;text-align:center}
+.testi .q{font-size:48px;color:#ddd;line-height:1}.testi blockquote{font-size:17px;font-weight:500;line-height:1.7;color:#333;margin:8px 0 12px}.testi .who{font-size:13px;color:var(--m);font-weight:600}.testi .stat{margin-top:16px;font-size:26px;font-weight:800}.testi .stat small{font-size:13px;font-weight:500;color:var(--m);display:block}
+
+/* FEATURES */
+.fg{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.fc{background:var(--bg);border-radius:var(--r);overflow:hidden;transition:transform .25s}.fc:hover{transform:translateY(-3px)}
+.fc-i{width:100%;aspect-ratio:4/3;background:#e8e8e8;display:flex;align-items:center;justify-content:center}.fc-i svg{width:56px;height:56px;color:var(--p)}
+.fc-b{padding:18px}.fc-b h3{font-size:16px;font-weight:700;margin-bottom:6px}.fc-b p{font-size:13px;color:var(--m);line-height:1.6}
+
+/* COMPARISON */
+.comp{background:var(--bg)}.ctbl{max-width:640px;margin:0 auto;border-radius:var(--r);overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.06)}.ctbl table{width:100%;border-collapse:collapse;background:#fff}.ctbl th,.ctbl td{padding:14px 16px;text-align:center;font-size:14px;border-bottom:1px solid var(--b)}.ctbl th{background:var(--p);color:#fff;font-weight:700;font-size:15px}.ctbl th:first-child,.ctbl td:first-child{text-align:right;font-weight:600}.ctbl td:nth-child(2){color:var(--g);font-weight:700}.ctbl tr:last-child td{border:none}
+
+/* QUALITY */
+.qg{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.qc{text-align:center;padding:24px 12px;border:2px solid var(--b);border-radius:var(--r);transition:.25s}.qc:hover{border-color:var(--p);transform:translateY(-3px)}.qc svg{width:36px;height:36px;margin:0 auto 10px;color:var(--p)}.qc h3{font-size:15px;font-weight:700;margin-bottom:6px}.qc p{font-size:12px;color:var(--m);line-height:1.5}
+
+/* EXPERT */
+.expert{padding:48px 16px}.expert-in{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:24px;background:var(--bg);border-radius:16px;padding:32px;position:relative}
+.expert-in::before{content:'\201D';position:absolute;top:12px;right:20px;font-size:64px;color:#ccc;line-height:1;font-family:Georgia,serif}
+.expert-in::after{content:'\201C';position:absolute;bottom:0;left:20px;font-size:64px;color:#ccc;line-height:1;font-family:Georgia,serif}
+.ex-img{width:120px;height:120px;border-radius:12px;overflow:hidden;flex-shrink:0;background:#ddd;display:flex;align-items:center;justify-content:center}
+.ex-img svg{width:80px;height:80px;color:#999}
+.ex-body{flex:1;position:relative;z-index:1}.ex-body p{font-size:16px;font-weight:600;line-height:1.7;margin-bottom:12px}.ex-body .who{font-size:13px;font-weight:700;font-style:italic;color:var(--m)}
+
+/* HOW TO USE */
+.howto{padding:56px 16px;text-align:center}.howto h2{font-size:28px;font-weight:800;margin-bottom:36px}
+.ht-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:var(--w);margin:0 auto;direction:ltr}
+.ht-card{background:var(--p);border-radius:16px;padding:32px 20px;text-align:center;color:#fff;position:relative;overflow:hidden}
+.ht-card::before{content:'';position:absolute;top:-30px;left:-30px;width:100px;height:100px;background:rgba(255,255,255,.04);border-radius:50%}
+.ht-num{font-size:48px;font-weight:900;opacity:.12;position:absolute;top:12px;right:16px;line-height:1}
+.ht-card svg{width:48px;height:48px;margin:0 auto 16px;color:#fff;opacity:.9;position:relative;z-index:1}
+.ht-card h3{font-size:20px;font-weight:800;margin-bottom:12px;position:relative;z-index:1}
+.ht-card p{font-size:14px;line-height:1.7;opacity:.85;position:relative;z-index:1}
+
+/* VIDEOS */
+.vids{padding:56px 16px;background:var(--bg)}.vids h2{text-align:center;font-size:28px;font-weight:800;margin-bottom:32px}
+.vg2{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:var(--w);margin:0 auto}
+.vc{position:relative;border-radius:16px;overflow:hidden;background:#000;aspect-ratio:9/16;cursor:pointer}
+.vc video{width:100%;height:100%;object-fit:cover}
+.vc-ph{width:100%;height:100%;background:linear-gradient(135deg,#2c2c2c,#1a1a1a);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;gap:12px}
+.vc-ph span{font-size:13px;opacity:.5}
+.play{position:absolute;bottom:16px;right:16px;width:44px;height:44px;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.play svg{width:20px;height:20px;color:#fff;margin-right:-2px}
+
+/* SHIPPING */
+.shg{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:560px;margin:0 auto}
+.shc{padding:20px;border:2px solid var(--b);border-radius:var(--r);text-align:center}.shc svg{width:32px;height:32px;margin:0 auto 8px;color:var(--p)}.shc h3{font-size:16px;font-weight:700;margin-bottom:4px}.shc p{font-size:13px;color:var(--m)}
+
+/* REVIEWS */
+.rev{background:var(--bg)}.rvg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rv{background:#fff;border-radius:var(--r);padding:20px;box-shadow:0 1px 8px rgba(0,0,0,.04)}.rv .st{color:#f1c40f;font-size:14px;letter-spacing:1px;margin-bottom:10px}.rv .tx{font-size:13px;line-height:1.7;color:#444;margin-bottom:12px}
+.rv .au{display:flex;align-items:center;gap:8px}.rv .av{width:36px;height:36px;border-radius:50%;background:var(--p);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}.rv .nm{font-size:13px;font-weight:600}.rv .lc{font-size:11px;color:var(--m)}.rv .vr{font-size:11px;color:var(--g)}
+
+/* FAQ (with icons like SENSOR) */
+.faq-list{max-width:700px;margin:0 auto}
+.faq-i{border-bottom:1px solid var(--b);overflow:hidden}
+.faq-i:first-child{border-top:1px solid var(--b)}
+.faq-q{width:100%;padding:18px 0;font-size:16px;font-weight:700;text-align:right;display:flex;align-items:center;gap:12px;background:#fff;transition:.15s}
+.faq-q:hover{color:var(--m)}
+.faq-q .fq-icon{width:28px;height:28px;flex-shrink:0;color:var(--p);order:2;margin-right:auto}
+.faq-q .fq-text{flex:1;order:1}
+.faq-q .fq-arrow{width:18px;height:18px;flex-shrink:0;transition:transform .25s;order:3;margin-left:0;color:var(--m)}
+.faq-i.open .fq-arrow{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:.3s ease;padding:0}
+.faq-i.open .faq-a{max-height:300px;padding:0 0 18px 40px}
+.faq-a p{font-size:14px;line-height:1.8;color:var(--m)}
+
+/* FINAL CTA */
+.final{background:linear-gradient(135deg,var(--p),#333);color:#fff;padding:48px 16px;text-align:center}.final h2{color:#fff;font-size:28px;font-weight:800;margin-bottom:8px}.final .desc{font-size:15px;opacity:.8;margin-bottom:6px}.final .bp{font-size:40px;font-weight:900}.final .op{font-size:17px;text-decoration:line-through;opacity:.45;margin-bottom:20px}.final-btn{display:inline-block;padding:16px 44px;background:#fff;color:var(--p);font-size:18px;font-weight:700;border-radius:10px;transition:.25s}.final-btn:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(255,255,255,.25)}
+
+/* FOOTER */
+.ftr{background:var(--p);color:#fff;padding:36px 16px 16px}.ftr-in{max-width:var(--w);margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-bottom:24px}.ftr h4{font-size:15px;font-weight:700;margin-bottom:12px}.ftr a{display:block;font-size:13px;color:rgba(255,255,255,.65);margin-bottom:8px}.ftr a:hover{color:#fff}.ftr-bt{border-top:1px solid rgba(255,255,255,.1);padding-top:16px;display:flex;justify-content:space-between;align-items:center}.ftr-ps{display:flex;gap:8px}.ftr-ps span{width:36px;height:22px;background:rgba(255,255,255,.12);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:600}.ftr-cp{font-size:12px;color:rgba(255,255,255,.4)}
+
+/* STICKY */
+.sticky{display:none;position:fixed;bottom:0;left:0;right:0;background:#fff;padding:10px 16px;box-shadow:0 -3px 16px rgba(0,0,0,.1);z-index:100}.sticky a{display:block;width:100%;padding:14px;background:var(--p);color:#fff;font-size:16px;font-weight:700;border-radius:8px;text-align:center}
+
+/* MOBILE */
+@media(max-width:768px){
+.nav{display:none}
+.hero{grid-template-columns:1fr;gap:20px;padding:16px}
+.info h1{font-size:24px}.pr-now{font-size:28px}
+.fg,.rvg{grid-template-columns:1fr}
+.qg{grid-template-columns:1fr 1fr}
+.shg{grid-template-columns:1fr}
+.ftr-in{grid-template-columns:1fr}
+.ftr-bt{flex-direction:column;gap:10px;text-align:center}
+.sticky{display:block}
+.trust{gap:14px;font-size:11px}
+.specs-in{gap:24px}
+.sec h2,.howto h2,.vids h2{font-size:24px}
+.hb-card h2{font-size:26px}
+.hb-card .pill{font-size:15px;padding:8px 24px}
+.hbf{grid-template-columns:1fr;gap:12px;max-width:300px;margin:0 auto}
+.hbf-c{padding:20px 16px;display:flex;align-items:center;gap:14px;text-align:right}
+.hbf-c svg{width:40px;height:40px;flex-shrink:0;margin:0}
+.secret-in{grid-template-columns:1fr;gap:24px}
+.secret-body{padding:0 16px;text-align:center}
+.secret-body h2{font-size:26px}
+.ps-cols{grid-template-columns:1fr;gap:24px}
+.ht-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto}
+.vg2{grid-template-columns:repeat(3,1fr);gap:10px}
+.expert-in{flex-direction:column;text-align:center;padding:24px}
+.ex-img{width:100px;height:100px}
+body{padding-bottom:60px}
+}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}.anim{opacity:0;animation:fadeUp .5s ease forwards}
+</style>
+</head>
+<body>
+<div class="promo"><b>50% הנחה</b> &mdash; המלאי אוזל במהירות</div>
+
+<header class="hdr"><div class="hdr-in"><div class="logo">RESPIRA</div><nav class="nav"><a href="#">דף הבית</a><a href="#">NOMAD CORE</a><a href="#">NOMAD GO</a><a href="#">הסיפור שלנו</a><a href="#">צור קשר</a></nav><button class="cart-b" onclick="goToCheckout()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg><span class="cart-d">0</span></button></div></header>
+
+<div class="trust">
+<span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>4.8/5 &bull; 729 ביקורות</span>
+<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>הגנת RFID מלאה</span>
+<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>תשלום מאובטח | ללא ריבית</span>
+</div>
+
+<!-- === HERO === -->
+<section class="hero">
+<div>
+<div class="gal-main"><div class="badge">-50%</div><img src="https://cdn.shopify.com/s/files/1/0628/4083/2089/files/Your_paragraph_text_20.png" alt="NOMAD CORE" id="mainImg"></div>
+<div class="thumbs">
+<div class="thumb active" onclick="swapImg(0)"><img src="https://cdn.shopify.com/s/files/1/0628/4083/2089/files/Your_paragraph_text_20.png" alt=""></div>
+<div class="thumb" onclick="swapImg(1)"><img src="https://cdn.shopify.com/s/files/1/0628/4083/2089/files/IMG-0827.png" alt=""></div>
+<div class="thumb" onclick="swapImg(2)"><img src="https://cdn.shopify.com/s/files/1/0628/4083/2089/files/Untitled_design_-_2026-01-28T003519.413.png" alt=""></div>
+<div class="thumb" onclick="swapImg(3)"><img src="https://cdn.shopify.com/s/files/1/0628/4083/2089/files/Untitled_1080_x_900_px_12.png" alt=""></div>
+<div class="thumb" onclick="swapImg(4)"><img src="https://cdn.shopify.com/s/files/1/0628/4083/2089/files/Untitled_1080_x_900_px_4.png" alt=""></div>
+</div>
+</div>
+<div class="info">
+<h1>NOMAD CORE &mdash; ארנק שמשדר שאתה יודע מה אתה עושה</h1>
+<p class="sub">אלומיניום פרימיום &bull; הגנת RFID &bull; עיצוב מינימליסטי</p>
+<div class="rate"><span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="ct">4.8/5 (729 ביקורות)</span></div>
+<div class="pr"><span class="pr-now">&#8362;249</span><span class="pr-was">&#8362;500</span><span class="pr-tag">חוסכים 50%</span></div>
+<div class="stk"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>המלאי אוזל במהירות</div>
+<div class="vg"><div class="vl">צבע: <strong id="colorName">שחור פלדה</strong></div>
+<div class="colors">
+<button class="cb act" data-color="שחור פלדה" data-variant="43054288240729"><span class="dot" style="background:#1a1a1a"></span>שחור פלדה</button>
+<button class="cb" data-color="אפור טיטניום" data-variant="43054288273497"><span class="dot" style="background:#8a8a8a"></span>אפור טיטניום</button>
+<button class="cb" data-color="כחול ים" data-variant="43054288306265"><span class="dot" style="background:#2c5282"></span>כחול ים</button>
+<button class="cb out" data-color="אדום רויאל" data-variant="43079899676761"><span class="dot" style="background:#c0392b"></span>אדום רויאל</button>
+</div></div>
+<div class="qr"><span>כמות:</span><div class="qw"><button onclick="setQty(-1)">&minus;</button><input type="text" value="1" readonly id="qtyVal"><button onclick="setQty(1)">+</button></div></div>
+<a href="#" class="cta" onclick="goToCheckout();return false">הוספה לעגלה</a>
+<div class="sec-txt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>תשלום מאובטח | תשלומים ללא ריבית</div>
+
+<!-- PAYMENT LOGOS BIG -->
+<div class="pay-big">
+<h3>אמצעי תשלום</h3>
+<div class="pay-logos">
+<div class="pay-logo"><span style="color:#1a1f71;font-size:18px;font-style:italic;font-weight:800">VISA</span></div>
+<div class="pay-logo"><svg viewBox="0 0 48 30"><circle cx="18" cy="15" r="10" fill="#eb001b"/><circle cx="30" cy="15" r="10" fill="#f79e1b"/><path d="M24 7.5a10 10 0 000 15 10 10 0 000-15z" fill="#ff5f00"/></svg></div>
+<div class="pay-logo"><span style="color:#1a1f71;font-size:10px;font-weight:700">ישראכרט</span></div>
+<div class="pay-logo"><span style="color:#4285f4;font-weight:700;font-size:13px">G Pay</span></div>
+<div class="pay-logo"><span style="color:#1ebdb6;font-size:18px;font-weight:800">bit</span></div>
+<div class="pay-logo"><span style="color:#000;font-size:13px;font-weight:600">Pay</span></div>
+</div>
+</div>
+
+<div class="bdg">
+<div class="bdg-c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span>הגנת RFID<br>מלאה</span></div>
+<div class="bdg-c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><span>משלוח<br>לכל הארץ</span></div>
+<div class="bdg-c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span>אחריות<br>מלאה</span></div>
+</div>
+</div>
+</section>
+
+<!-- === HERO BANNER === -->
+<section class="hb">
+<div class="guar">אחריות מלאה | לא מרוצה? מחזירים לך</div>
+<div class="hb-card">
+<h2>NOMAD CORE של RESPIRA</h2>
+<div class="pill">ארנק כרטיסים מינימליסטי מאלומיניום פרימיום</div>
+<div class="hbf">
+<div class="hbf-c"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M32 6C18.7 6 8 16.7 8 30c0 17 24 28 24 28s24-11 24-28C56 16.7 45.3 6 32 6z"/><path d="M24 30l5 5 11-11"/></svg><span>הגנת RFID מלאה<br>מפני גניבת מידע</span></div>
+<div class="hbf-c"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="14" y="16" width="36" height="32" rx="3"/><path d="M14 26h36"/><circle cx="22" cy="40" r="3"/><path d="M50 32h8M50 38h8"/></svg><span>מחליף ארנקים מנופחים<br>ותשלומים על עור יקר</span></div>
+<div class="hbf-c"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="16" y="12" width="32" height="40" rx="4"/><path d="M24 22h16M24 30h16M24 38h10"/><circle cx="44" cy="44" r="6"/><path d="M42 44l2 2 4-4"/></svg><span>12 כרטיסים בקלות<br>בעובי 12mm בלבד</span></div>
+</div>
+</div>
+<div class="urg"><span class="urg-dot"></span>יחידות אחרונות במלאי</div>
+</section>
+
+<!-- === THE SECRET === -->
+<section class="secret">
+<div class="secret-in">
+<div class="secret-imgs">
+<!-- BEFORE IMAGE: Replace with your before image -->
+<div class="secret-img" style="background:#d0d0d0;display:flex;align-items:center;justify-content:center;color:#888;font-size:14px">
+<div class="label before">לפני</div>
+תמונת לפני - הכניסו כאן URL
+</div>
+<!-- AFTER IMAGE: Replace with your after image -->
+<div class="secret-img" style="background:#b0b0b0;display:flex;align-items:center;justify-content:center;color:#666;font-size:14px">
+<div class="label after">אחרי</div>
+תמונת אחרי - הכניסו כאן URL
+</div>
+<div class="secret-arrows"><span>&lsaquo;</span><span>&rsaquo;</span></div>
+</div>
+<div class="secret-body">
+<h2>הסוד של RESPIRA<span>מה שהופך ארנק רגיל לאקססורי שאנשים שואלים עליו</span></h2>
+<div class="secret-points">
+<div class="secret-point">
+<strong>מראה שמשתפר עם הזמן:</strong>
+<p>בניגוד לעור שנשחק ומתקלף, האלומיניום המצופה מפתח פטינה עדינה שרק מוסיפה לו אופי. ככל שעובר זמן, הוא נראה יותר טוב.</p>
+</div>
+<div class="secret-point">
+<strong>שקט נפשי מובנה:</strong>
+<p>הגנת RFID פעילה מהרגע הראשון. לא צריך לחשוב על זה, לא צריך להפעיל כלום. הכרטיסים שלך מוגנים כל הזמן.</p>
+</div>
+<div class="secret-point">
+<strong>הסוד הקטן שלך:</strong>
+<p>עיצוב כל כך מדויק ומינימליסטי, שאנשים מניחים שזה עולה פי שלוש ממה ששילמת. אף אחד לא ינחש.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- === SPECS === -->
+<section class="specs"><div class="specs-in">
+<div class="spec"><strong>12</strong><small>כרטיסים</small></div>
+<div class="spec"><strong>65g</strong><small>משקל</small></div>
+<div class="spec"><strong>12mm</strong><small>עובי</small></div>
+<div class="spec"><strong>RFID</strong><small>הגנה מלאה</small></div>
+<div class="spec"><strong>AL</strong><small>אלומיניום</small></div>
+</div></section>
+
+<!-- === PROBLEM / SOLUTION === -->
+<section class="ps"><div class="ps-in"><div class="ps-cols">
+<div>
+<div class="ps-hdr bad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg><h3>הארנק הישן שלך</h3></div>
+<ul class="psl bad">
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>בליטה מביכה שנראית מהמרחק</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>חיפוש אינסופי אחרי הכרטיס הנכון</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>אפס הגנה מגניבת מידע דיגיטלית</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>עור שנשחק ומתקלף תוך חודשים</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>מראה שלא עומד בקצב שלך</li>
+</ul></div>
+<div>
+<div class="ps-hdr good"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg><h3>NOMAD CORE</h3></div>
+<ul class="psl good">
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>12 כרטיסים בעובי של 12mm. נעלם בכיס</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>מנגנון שליפה &mdash; הכרטיס הנכון בלחיצה</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>חסימת RFID מלאה. המידע שלך בטוח</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>אלומיניום שלא נשרט ולא מתבלה</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>עיצוב שגורם לאנשים לשאול מאיפה זה</li>
+</ul></div>
+</div></div></section>
+
+<!-- === TESTIMONIAL === -->
+<section class="sec"><div class="testi"><div class="q">&ldquo;</div><blockquote>הגימור המתכתי ברמה אחרת. זה לא סתם ארנק &mdash; זה אקססורי שמשדר בדיוק את מה שאתה רוצה. כולם שואלים מאיפה.</blockquote><div class="who">&mdash; יואב, תל אביב</div><div class="stat">4.8/5<small>מתוך 729 ביקורות מאומתות</small></div></div></section>
+
+<!-- === HOW TO USE === -->
+<section class="howto">
+<h2>אופן השימוש</h2>
+<div class="ht-grid">
+<div class="ht-card"><div class="ht-num">3</div>
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="32" cy="32" r="22"/><path d="M32 20v12l8 4"/></svg>
+<h3>שלב שלישי</h3><p>לחיצה על הכפתור התחתון וכל הכרטיסים נשלפים בצורה מסודרת. בוחרים את הנכון ומחזירים</p></div>
+<div class="ht-card"><div class="ht-num">2</div>
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="14" y="12" width="36" height="40" rx="4"/><path d="M22 22h20M22 30h20M22 38h12"/></svg>
+<h3>שלב שני</h3><p>מכניסים את הכרטיסים לתוך התא. הארנק מחזיק עד 12 כרטיסים בנוחות מלאה. שטרות ברצועה החיצונית</p></div>
+<div class="ht-card"><div class="ht-num">1</div>
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="12" y="8" width="40" height="48" rx="6"/><path d="M26 32h12M32 26v12"/></svg>
+<h3>שלב ראשון</h3><p>פותחים את האריזה ומוציאים את ה-NOMAD CORE. כולל רצועה אלסטית מותקנת מראש</p></div>
+</div>
+</section>
+
+<!-- === FEATURES === -->
+<section class="sec"><div class="sec-in">
+<h2>למה NOMAD CORE</h2>
+<div class="fg">
+<div class="fc"><div class="fc-i"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="22" width="36" height="28" rx="3"/><path d="M22 22v-6a10 10 0 0120 0v6"/><circle cx="32" cy="38" r="4"/><line x1="32" y1="42" x2="32" y2="47"/></svg></div><div class="fc-b"><h3>הגנת RFID מוחלטת</h3><p>חסימה מלאה של סריקות לא מורשות. אף אחד לא ניגש למידע שלך בלי שתדע</p></div></div>
+<div class="fc"><div class="fc-i"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="18" width="40" height="28" rx="3"/><path d="M52 32h6l-3-6"/><path d="M12 32H6l3 6"/><rect x="24" y="26" width="16" height="4" rx="1"/></svg></div><div class="fc-b"><h3>שליפה בלחיצה אחת</h3><p>מנגנון שליפה חכם שמוציא את הכרטיס הנכון. בלי לחפש, בלי להסתבך</p></div></div>
+<div class="fc"><div class="fc-i"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6l7 14h15l-12 10 5 15-15-10-15 10 5-15L10 20h15z"/></svg></div><div class="fc-b"><h3>עיצוב שמדבר בשבילך</h3><p>גימור מתכתי מעודן, קווים נקיים, נוכחות שקטה שמשדרת סטייל ללא מאמץ</p></div></div>
+<div class="fc"><div class="fc-i"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="14" width="48" height="36" rx="2"/><path d="M8 14h48M8 24h48"/><circle cx="16" cy="40" r="3"/></svg></div><div class="fc-b"><h3>רצועת מזומנים אלסטית</h3><p>שטרות, כרטיסי ביקור, קבלות &mdash; הכל מאורגן במקום אחד קומפקטי</p></div></div>
+<div class="fc"><div class="fc-i"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="22"/><path d="M32 16v16l10 6"/></svg></div><div class="fc-b"><h3>65 גרם. שוכחים שהוא שם</h3><p>86&times;54&times;12mm. קטן מכרטיס אשראי, קל מכל דבר שהיה לך בכיס</p></div></div>
+<div class="fc"><div class="fc-i"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6C18.7 6 8 16.7 8 30c0 17 24 28 24 28s24-11 24-28C56 16.7 45.3 6 32 6z"/><path d="M24 30l5 5 11-11"/></svg></div><div class="fc-b"><h3>עמיד לשנים של שימוש</h3><p>ציפוי אנודייז פרימיום שלא נשרט. אחרי שנה הוא נראה בדיוק כמו ביום הראשון</p></div></div>
+</div></div></section>
+
+<!-- === COMPARISON === -->
+<section class="sec comp"><div class="sec-in">
+<h2>NOMAD CORE מול ארנק רגיל</h2>
+<div class="ctbl"><table>
+<thead><tr><th>תכונה</th><th>NOMAD CORE</th><th>ארנק רגיל</th></tr></thead>
+<tbody>
+<tr><td>הגנת RFID</td><td>&#10003;</td><td>&#10007;</td></tr>
+<tr><td>שליפה מהירה</td><td>&#10003;</td><td>&#10007;</td></tr>
+<tr><td>עמיד לשריטות</td><td>&#10003;</td><td>&#10007;</td></tr>
+<tr><td>פרופיל דק (12mm)</td><td>&#10003;</td><td>&#10007;</td></tr>
+<tr><td>משקל קל (65g)</td><td>&#10003;</td><td>&#10007;</td></tr>
+<tr><td>מראה פרימיום</td><td>&#10003;</td><td>&#10007;</td></tr>
+<tr><td>מחזיק 12 כרטיסים</td><td>&#10003;</td><td>&#10007;</td></tr>
+</tbody></table></div></div></section>
+
+<!-- === EXPERT QUOTE === -->
+<section class="expert"><div class="expert-in">
+<div class="ex-img"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="50" cy="35" r="18"/><path d="M15 90c0-20 15-35 35-35s35 15 35 35"/><rect x="40" y="55" width="20" height="5" rx="2"/></svg></div>
+<div class="ex-body">
+<p>ה-NOMAD CORE עומד בתקני עיצוב תעשייתי מחמירים. עשוי מאלומיניום מטוסים, נבדק לעמידות בתנאי שימוש יומיומיים קיצוניים, ואושר כמוצר ברמה הגבוהה ביותר.</p>
+<div class="who">מעצב תעשייתי בכיר ממליץ.</div>
+</div>
+</div></section>
+
+<!-- === VIDEOS === -->
+<section class="vids">
+<h2>ראו בעצמכם</h2>
+<div class="vg2">
+<div class="vc">
+<!-- VIDEO 1: Replace src with your video URL -->
+<div class="vc-ph"><svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2" style="width:48px;height:48px;opacity:.4"><polygon points="24,16 48,32 24,48"/></svg><span>סרטון 1 - הכניסו כאן URL</span></div>
+<div class="play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 20,12 8,19"/></svg></div>
+</div>
+<div class="vc">
+<!-- VIDEO 2: Replace src with your video URL -->
+<div class="vc-ph"><svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2" style="width:48px;height:48px;opacity:.4"><polygon points="24,16 48,32 24,48"/></svg><span>סרטון 2 - הכניסו כאן URL</span></div>
+<div class="play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 20,12 8,19"/></svg></div>
+</div>
+<div class="vc">
+<!-- VIDEO 3: Replace src with your video URL -->
+<div class="vc-ph"><svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2" style="width:48px;height:48px;opacity:.4"><polygon points="24,16 48,32 24,48"/></svg><span>סרטון 3 - הכניסו כאן URL</span></div>
+<div class="play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 20,12 8,19"/></svg></div>
+</div>
+</div>
+</section>
+
+<!-- === SHIPPING === -->
+<section class="sec"><div class="sec-in">
+<h2>זמני משלוח</h2>
+<div class="shg">
+<div class="shc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg><h3>נקודת איסוף</h3><p>5&ndash;15 ימי עסקים</p></div>
+<div class="shc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><h3>משלוח עד הבית</h3><p>5&ndash;12 ימי עסקים</p></div>
+</div></div></section>
+
+<!-- === REVIEWS === -->
+<section class="sec rev"><div class="sec-in">
+<h2>729 לקוחות לא טועים</h2>
+<div class="rvg">
+<div class="rv"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="tx">הגימור המתכתי ברמה אחרת. מרגיש כמו אקססורי יוקרתי, לא סתם ארנק. כולם שואלים מאיפה.</p><div class="au"><div class="av">י</div><div><div class="nm">יואב</div><div class="lc">תל אביב</div><div class="vr">&#10003; רכישה מאומתת</div></div></div></div>
+<div class="rv"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="tx">השחור מט נראה הרבה יותר יוקרתי בחיים מאשר בתמונות. קיבלתי מלא מחמאות כבר ביום הראשון.</p><div class="au"><div class="av">ג</div><div><div class="nm">גיא</div><div class="lc">הרצליה</div><div class="vr">&#10003; רכישה מאומתת</div></div></div></div>
+<div class="rv"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="tx">מחשבה ברורה בכל פרט. ברגים, גומי, קליפ &mdash; הכל מוצק ועמיד. פרימיום אמיתי, לא סתם מילה.</p><div class="au"><div class="av">א</div><div><div class="nm">איתי</div><div class="lc">חיפה</div><div class="vr">&#10003; רכישה מאומתת</div></div></div></div>
+<div class="rv"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="tx">עברתי מארנק עור של מעצב. זה מרגיש מודרני יותר, מקצועי יותר, ועולה פחות. אין דרך חזרה.</p><div class="au"><div class="av">א</div><div><div class="nm">אורן</div><div class="lc">רעננה</div><div class="vr">&#10003; רכישה מאומתת</div></div></div></div>
+<div class="rv"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="tx">שימוש יומיומי כבר חצי שנה ועדיין נראה כמו חדש. הציפוי עמיד לשריטות והמנגנון חלק כמו ביום הראשון.</p><div class="au"><div class="av">ד</div><div><div class="nm">דניאל</div><div class="lc">באר שבע</div><div class="vr">&#10003; רכישה מאומתת</div></div></div></div>
+<div class="rv"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="tx">נתתי במתנה ועשה רושם מיידי. משדר איכות מהרגע שפותחים את האריזה. מתנה שלא צריך להתלבט עליה.</p><div class="au"><div class="av">ל</div><div><div class="nm">לירן</div><div class="lc">רמת גן</div><div class="vr">&#10003; רכישה מאומתת</div></div></div></div>
+</div></div></section>
+
+<!-- === FAQ (7 questions, SENSOR style with icons) === -->
+<section class="sec"><div class="sec-in">
+<h2>שאלות נפוצות</h2>
+<div class="faq-list">
+
+<div class="faq-i"><button class="faq-q" onclick="toggleFaq(this)">
+<svg class="fq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9 9a3 3 0 015.12 2.13c0 1.37-2.12 1.87-2.12 3.37"/><circle cx="12" cy="17.5" r=".5" fill="currentColor"/></svg>
+<span class="fq-text">איך מנגנון השליפה של NOMAD CORE עובד?</span>
+<svg class="fq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+</button><div class="faq-a"><p>לחיצה קלה על הכפתור התחתון גורמת לכרטיסים לצוץ החוצה בצורה מדורגת. אתה בוחר את הכרטיס הנכון, שולף אותו, ומחזיר את השאר פנימה. התהליך לוקח שנייה אחת ומבוסס על מנגנון פלדת אל-חלד שמחזיק לשנים.</p></div></div>
+
+<div class="faq-i"><button class="faq-q" onclick="toggleFaq(this)">
+<svg class="fq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+<span class="fq-text">מה זה הגנת RFID ולמה זה קריטי?</span>
+<svg class="fq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+</button><div class="faq-a"><p>RFID מאפשר תשלום ללא מגע &mdash; אבל בלי הגנה, גנבים עם סורק פשוט יכולים לקרוא את פרטי הכרטיס שלך מבלי שתרגיש. ה-NOMAD CORE בנוי משכבת אלומיניום שחוסמת כל סריקה לא מורשית. המידע שלך נשאר בטוח גם בהמון, בתחבורה ציבורית, או בכל מקום אחר.</p></div></div>
+
+<div class="faq-i"><button class="faq-q" onclick="toggleFaq(this)">
+<svg class="fq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+<span class="fq-text">איך אדע שזה מתאים לי?</span>
+<svg class="fq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+</button><div class="faq-a"><p>אם אתה נושא בין 3 ל-12 כרטיסים ורוצה ארנק שנעלם בכיס בלי בליטה &mdash; NOMAD CORE נבנה בשבילך. המידות (86&times;54&times;12mm) קטנות מכרטיס אשראי רגיל. 65 גרם שלא מרגישים. מתאים לכיס קדמי, כיס אחורי, וגם לתיק.</p></div></div>
+
+<div class="faq-i"><button class="faq-q" onclick="toggleFaq(this)">
+<svg class="fq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+<span class="fq-text">כמה זמן לוקח המשלוח?</span>
+<svg class="fq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+</button><div class="faq-a"><p>משלוח לנקודת איסוף: 5&ndash;15 ימי עסקים. משלוח עד הבית: 5&ndash;12 ימי עסקים. ההזמנה מטופלת תוך 24 שעות ותקבלו מספר מעקב למייל. בתקופות עומס ייתכנו עיכובים קלים.</p></div></div>
+
+<div class="faq-i"><button class="faq-q" onclick="toggleFaq(this)">
+<svg class="fq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+<span class="fq-text">האם זה נראה ומרגיש פרימיום גם במציאות?</span>
+<svg class="fq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+</button><div class="faq-a"><p>כן, ואפילו יותר. רוב הלקוחות מדווחים שהמוצר נראה טוב יותר במציאות מאשר בתמונות. הגימור המתכתי, המשקל המדויק, והתחושה ביד &mdash; הכל משדר איכות שמרגישים מהרגע הראשון. 729 ביקורות 4.8/5 מאשרות.</p></div></div>
+
+<div class="faq-i"><button class="faq-q" onclick="toggleFaq(this)">
+<svg class="fq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+<span class="fq-text">מתאים למתנה?</span>
+<svg class="fq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+</button><div class="faq-a"><p>בהחלט &mdash; וזו אחת הסיבות הפופולריות לרכישה. ה-NOMAD CORE מגיע באריזה מעוצבת שמשדרת יוקרה כבר מהפתיחה. מתנה שלא צריך להתלבט עליה &mdash; מתאימה לכל גבר שמעריך סטייל ופרקטיות.</p></div></div>
+
+<div class="faq-i"><button class="faq-q" onclick="toggleFaq(this)">
+<svg class="fq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="7.5 4.21 12 6.81 16.5 4.21"/></svg>
+<span class="fq-text">100% החזר כספי מובטח</span>
+<svg class="fq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+</button><div class="faq-a"><p>אנחנו עומדים מאחורי המוצר. אם מסיבה כלשהי אתה לא מרוצה &mdash; פנה אלינו ונסדר החזר מלא, בלי שאלות מיותרות. אחריות מלאה על המנגנון, החומרים והציפוי. קנייה בטוחה לגמרי.</p></div></div>
+
+</div></div></section>
+
+<!-- === FINAL CTA === -->
+<section class="final">
+<h2>הארנק הבא שלך מחכה</h2>
+<p class="desc">הצטרף למאות שכבר עשו את המעבר</p>
+<div class="bp">&#8362;249</div>
+<div class="op">&#8362;500</div>
+<br><a href="#" class="final-btn" onclick="goToCheckout();return false">להזמנה</a>
+</section>
+
+<!-- === FOOTER === -->
+<footer class="ftr"><div class="ftr-in">
+<div><h4>תפריט</h4><a href="#">דף הבית</a><a href="#">NOMAD CORE</a><a href="#">NOMAD GO</a><a href="#">הסיפור שלנו</a><a href="#">צור קשר</a></div>
+<div><h4>מדיניות</h4><a href="#">מדיניות פרטיות</a><a href="#">מדיניות החזרות</a><a href="#">תנאי שימוש</a><a href="#">מדיניות משלוחים</a></div>
+<div><h4>RESPIRA</h4><p style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.7">הפרטים הקטנים עושים את ההבדל. כל מוצר מעוצב עם תשומת לב לכל פרט &mdash; מהחומרים ועד האריזה.</p></div>
+</div><div class="ftr-bt"><span class="ftr-cp">&copy; 2026, RESPIRA</span><div class="ftr-ps"><span>VISA</span><span>MC</span><span>AMEX</span><span>Pay</span><span>GPay</span></div></div></footer>
+
+<div class="sticky"><a href="#" onclick="goToCheckout();return false">הוספה לעגלה &mdash; &#8362;249</a></div>
+
+<script>
+var STORE='respira-il',VARS={'שחור פלדה':'43054288240729','אפור טיטניום':'43054288273497','כחול ים':'43054288306265','אדום רויאל':'43079899676761'};
+var IMGS=['https://cdn.shopify.com/s/files/1/0628/4083/2089/files/Your_paragraph_text_20.png','https://cdn.shopify.com/s/files/1/0628/4083/2089/files/IMG-0827.png','https://cdn.shopify.com/s/files/1/0628/4083/2089/files/Untitled_design_-_2026-01-28T003519.413.png','https://cdn.shopify.com/s/files/1/0628/4083/2089/files/Untitled_1080_x_900_px_12.png','https://cdn.shopify.com/s/files/1/0628/4083/2089/files/Untitled_1080_x_900_px_4.png'];
+var color='שחור פלדה',qty=1;
+function goToCheckout(){window.location.href='https://'+STORE+'.myshopify.com/cart/'+VARS[color]+':'+qty}
+function swapImg(i){document.getElementById('mainImg').src=IMGS[i];document.querySelectorAll('.thumb').forEach(function(t,j){t.classList.toggle('active',j===i)})}
+document.querySelectorAll('.cb:not(.out)').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.cb').forEach(function(x){x.classList.remove('act')});this.classList.add('act');color=this.dataset.color;document.getElementById('colorName').textContent=color})});
+function setQty(d){qty=Math.max(1,qty+d);document.getElementById('qtyVal').value=qty}
+function toggleFaq(btn){var item=btn.closest('.faq-i'),was=item.classList.contains('open');document.querySelectorAll('.faq-i').forEach(function(i){i.classList.remove('open')});if(!was)item.classList.add('open')}
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('anim');obs.unobserve(e.target)}})},{threshold:0.1});
+document.querySelectorAll('.fc,.qc,.rv,.ht-card').forEach(function(el){obs.observe(el)});
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!-- ============================================== -->
+<!-- KAJABI: Settings → Site → Custom Code → Header -->
+<!-- Paste this ENTIRE block in the site-wide header -->
+<!-- ============================================== -->
+
+<!-- Fix #1: Hebrew Language Declaration -->
+<script>
+  document.documentElement.lang = 'he';
+  document.documentElement.dir = 'rtl';
+</script>
+
+<!-- Fix #2: Organization Schema (site-wide) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "אביב מלכה - Ecom Hackers",
+  "alternateName": "Aviv Malka",
+  "url": "https://www.avivmalka.com",
+  "logo": "https://www.avivmalka.com/logo.png",
+  "description": "פלטפורמת הלימוד המובילה בישראל לאיקומרס, דרופשיפינג ושופיפיי. יותר מ-5,000 תלמידים.",
+  "founder": {
+    "@type": "Person",
+    "name": "אביב מלכה",
+    "alternateName": "Aviv Malka",
+    "jobTitle": "מייסד ומנטור איקומרס",
+    "knowsAbout": ["ecommerce", "dropshipping", "Shopify", "digital marketing", "Facebook Ads"],
+    "url": "https://www.avivmalka.com/about"
+  },
+  "sameAs": [
+    "https://www.instagram.com/aviv_malka7",
+    "https://www.youtube.com/@avivmalka",
+    "https://www.facebook.com/groups/ecommercevaucher"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "hello@avivmalka.com",
+    "contactType": "customer support",
+    "availableLanguage": "Hebrew"
+  }
+}
+</script>
+
+<!-- Fix #3: WebSite Schema with Search (site-wide) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "אביב מלכה - Ecom Hackers",
+  "url": "https://www.avivmalka.com",
+  "inLanguage": "he",
+  "publisher": {
+    "@type": "Organization",
+    "name": "אביב מלכה - Ecom Hackers"
+  }
+}
+</script>
+
+<!-- Fix #4: Canonical tag helper (forces www version) -->
+<script>
+  if (!document.querySelector('link[rel="canonical"]')) {
+    var link = document.createElement('link');
+    link.rel = 'canonical';
+    link.href = 'https://www.avivmalka.com' + window.location.pathname;
+    document.head.appendChild(link);
+  }
+</script>
+
+<!-- Fix #5: Open Graph defaults (fallback if page doesn't set them) -->
+<script>
+  (function() {
+    var ogTags = {
+      'og:site_name': 'אביב מלכה - Ecom Hackers',
+      'og:locale': 'he_IL',
+      'og:type': 'website',
+      'twitter:card': 'summary_large_image',
+      'twitter:site': '@aviv_malka7'
+    };
+    Object.keys(ogTags).forEach(function(name) {
+      if (!document.querySelector('meta[property="' + name + '"], meta[name="' + name + '"]')) {
+        var meta = document.createElement('meta');
+        meta.setAttribute(name.startsWith('twitter') ? 'name' : 'property', name);
+        meta.content = ogTags[name];
+        document.head.appendChild(meta);
+      }
+    });
+  })();
+</script>

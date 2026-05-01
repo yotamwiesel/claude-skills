@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="UTF-8">
+<title>תוכנית שיפור קורס Ecom Hackers 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Segoe UI', Arial, sans-serif; background: #f0f2f5; direction: rtl; padding: 20px; color: #1a1a2e; line-height: 1.6; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px 35px; border-radius: 16px; margin-bottom: 25px; }
+  .header h1 { font-size: 26px; margin-bottom: 8px; }
+  .header p { opacity: 0.85; font-size: 15px; }
+  .stats-row { display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
+  .stat-card { background: white; border-radius: 12px; padding: 18px 22px; flex: 1; min-width: 140px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .stat-num { font-size: 32px; font-weight: 800; color: #667eea; }
+  .stat-label { font-size: 13px; color: #666; margin-top: 4px; }
+  .section { background: white; border-radius: 14px; padding: 25px 30px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .section-title { font-size: 20px; font-weight: 700; color: #1a1a2e; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; }
+  .section-subtitle { font-size: 14px; color: #888; margin-bottom: 18px; }
+  .week-header { background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 14px 20px; border-radius: 10px; margin: 20px 0 12px; font-size: 17px; font-weight: 700; }
+  .week-header:first-of-type { margin-top: 0; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+  th { background: #f8f9fc; color: #555; font-size: 12px; font-weight: 600; text-align: right; padding: 10px 14px; border-bottom: 2px solid #e8e8f0; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 10px 14px; border-bottom: 1px solid #f0f0f5; font-size: 14px; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover { background: #fafafe; }
+  .badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; white-space: nowrap; display: inline-block; font-weight: 600; }
+  .badge-existing { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+  .badge-new { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+  .badge-new-text { background: #f3e5f5; color: #7b1fa2; border: 1px solid #ce93d8; }
+  .badge-merge { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+  .badge-move { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+  .badge-delete { background: #ffebee; color: #b71c1c; border: 1px solid #ef9a9a; }
+  .badge-priority-a { background: #ff1744; color: white; }
+  .badge-priority-b { background: #ff9100; color: white; }
+  .badge-priority-c { background: #2979ff; color: white; }
+  .note { font-size: 12px; color: #888; margin-top: 3px; }
+  .critical { background: #fff8e1; border-right: 4px solid #ff6d00; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px; }
+  .summary-item { background: #f8f9fc; border-radius: 10px; padding: 16px; text-align: center; }
+  .summary-item .num { font-size: 28px; font-weight: 800; color: #667eea; }
+  .summary-item .label { font-size: 13px; color: #666; }
+  .action-list { list-style: none; padding: 0; }
+  .action-list li { padding: 10px 14px; border-bottom: 1px solid #f0f0f5; display: flex; align-items: center; gap: 10px; font-size: 14px; }
+  .action-list li:last-child { border-bottom: none; }
+  .action-icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .icon-merge { background: #fff3e0; }
+  .icon-move { background: #fce4ec; }
+  .icon-delete { background: #ffebee; }
+  .icon-hide { background: #f3e5f5; }
+  .timeline { margin-top: 15px; }
+  .timeline-item { display: flex; align-items: flex-start; gap: 15px; padding: 12px 0; border-bottom: 1px solid #f0f0f5; }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-date { background: #667eea; color: white; padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 700; white-space: nowrap; min-width: 60px; text-align: center; }
+  .timeline-task { font-size: 14px; }
+  .divider { height: 1px; background: #e8e8f0; margin: 15px 0; }
+  @media print { body { background: white; } .section { box-shadow: none; border: 1px solid #ddd; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>תוכנית שיפור קורס Ecom Hackers 2026</h1>
+  <p>מבנה מעודכן על בסיס משוב תלמידים | אביב מלכה | אפריל 2026</p>
+</div>
+
+<div class="stats-row">
+  <div class="stat-card"><div class="stat-num">14</div><div class="stat-label">סרטונים חדשים</div></div>
+  <div class="stat-card"><div class="stat-num">5</div><div class="stat-label">תכנים טקסטואליים</div></div>
+  <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">זוגות למיזוג</div></div>
+  <div class="stat-card"><div class="stat-num">~80</div><div class="stat-label">Draft להסתיר</div></div>
+  <div class="stat-card"><div class="stat-num">2</div><div class="stat-label">שיעורים להזזה</div></div>
+</div>
+
+<!-- ==================== סרטונים חדשים ==================== -->
+<div class="section">
+  <div class="section-title">סרטונים חדשים להקלטה</div>
+  <div class="section-subtitle">מחולק לפי עדיפות — 14 סרטונים, רובם קצרים</div>
+
+  <div class="week-header" style="background: linear-gradient(135deg, #ff1744, #d50000);">עדיפות א׳ — דחוף (שבוע 1-2)</div>
+  <table>
+    <tr><th>#</th><th>סרטון</th><th>אורך</th><th>מיקום</th><th>למה</th></tr>
+    <tr><td>1</td><td>מפת דרכים — מה נעשה בכל שבוע</td><td>3-4 דק׳</td><td>שבוע 0</td><td>תלמידים לא יודעים לאן הולכים</td></tr>
+    <tr><td>2</td><td>תקציב ריאלי — כמה כסף צריך</td><td>3-4 דק׳</td><td>שבוע 0</td><td>פער בין שיווק למציאות</td></tr>
+    <tr><td>3</td><td>מילון מונחים — כל המושגים</td><td>5-7 דק׳</td><td>שבוע 0</td><td>מושגים לא מוסברים</td></tr>
+    <tr><td>4</td><td>הכלים שנשתמש בהם — סיור מהיר</td><td>5 דק׳</td><td>שבוע 0</td><td>CJ, DSERS, Ads Library לא ברורים</td></tr>
+    <tr><td>5</td><td>מה זה פרסום ולמה חייבים</td><td>3 דק׳</td><td>שבוע 0</td><td>תלמידים מופתעים שצריך לשלם</td></tr>
+    <tr class="critical"><td>6</td><td><strong>התקנת פיקסל — מדריך מעודכן</strong></td><td>5-7 דק׳</td><td>שבוע ד׳</td><td><strong>השיעור הקיים ב-Draft! חור קריטי</strong></td></tr>
+  </table>
+
+  <div class="week-header" style="background: linear-gradient(135deg, #ff9100, #ff6d00);">עדיפות ב׳ — חשוב (שבוע 2-3)</div>
+  <table>
+    <tr><th>#</th><th>סרטון</th><th>אורך</th><th>מיקום</th><th>למה</th></tr>
+    <tr><td>7</td><td>יעדי שבוע א׳</td><td>1-2 דק׳</td><td>פתיחת שבוע א׳</td><td>בניית מבנה ורצף</td></tr>
+    <tr><td>8</td><td>יעדי שבוע ב׳</td><td>1-2 דק׳</td><td>פתיחת שבוע ב׳</td><td>בניית מבנה ורצף</td></tr>
+    <tr><td>9</td><td>יעדי שבוע ג׳</td><td>1-2 דק׳</td><td>פתיחת שבוע ג׳</td><td>בניית מבנה ורצף</td></tr>
+    <tr><td>10</td><td>יעדי שבוע ד׳</td><td>1-2 דק׳</td><td>פתיחת שבוע ד׳</td><td>בניית מבנה ורצף</td></tr>
+    <tr><td>11</td><td>מה זה קריאייטיב ולמה חשוב</td><td>3 דק׳</td><td>שבוע ג׳</td><td>מושג שלא מוסבר</td></tr>
+    <tr><td>12</td><td>מה זה פייסבוק Ads ואיך המערכת עובדת</td><td>3-4 דק׳</td><td>שבוע ד׳</td><td>"אביב מדבר לאנשים שכבר מבינים"</td></tr>
+    <tr><td>13</td><td>הבק של שופיפיי — הגדרות, טמפלט, צ׳ק אאוט</td><td>10-15 דק׳</td><td>שבוע ב׳</td><td>תלמידים ציינו שזה חסר</td></tr>
+  </table>
+
+  <div class="week-header" style="background: linear-gradient(135deg, #2979ff, #1565c0);">עדיפות ג׳ — ארוך טווח</div>
+  <table>
+    <tr><th>#</th><th>סרטון</th><th>אורך</th><th>מיקום</th><th>למה</th></tr>
+    <tr><td>14</td><td>מציאת מוצר ב-Real Time</td><td>15-20 דק׳</td><td>שבוע א׳</td><td>"הכל מוסבר מהר, בעיקר מציאת מוצרים"</td></tr>
+  </table>
+</div>
+
+<!-- ==================== תכנים טקסטואליים ==================== -->
+<div class="section">
+  <div class="section-title">תכנים טקסטואליים חדשים (לא סרטונים)</div>
+  <div class="section-subtitle">ליצור מיד — lessons טקסט בפלטפורמת הקורס</div>
+  <table>
+    <tr><th>#</th><th>תוכן</th><th>סוג</th><th>מיקום</th></tr>
+    <tr><td>1</td><td>Glossary — מילון מונחים כתוב (טבלה)</td><td><span class="badge badge-new-text">טקסט</span></td><td>שבוע 0</td></tr>
+    <tr><td>2</td><td>צ׳קליסט שבוע א׳ — "לפני שממשיכים ודאו..."</td><td><span class="badge badge-new-text">טקסט</span></td><td>סוף שבוע א׳</td></tr>
+    <tr><td>3</td><td>צ׳קליסט שבוע ב׳</td><td><span class="badge badge-new-text">טקסט</span></td><td>סוף שבוע ב׳</td></tr>
+    <tr><td>4</td><td>צ׳קליסט שבוע ג׳</td><td><span class="badge badge-new-text">טקסט</span></td><td>סוף שבוע ג׳</td></tr>
+    <tr><td>5</td><td>צ׳קליסט שבוע ד׳</td><td><span class="badge badge-new-text">טקסט</span></td><td>סוף שבוע ד׳</td></tr>
+  </table>
+</div>
+
+<!-- ==================== פעולות ==================== -->
+<div class="section">
+  <div class="section-title">פעולות על שיעורים קיימים</div>
+  <div class="section-subtitle">מיזוג, הזזה, מחיקה</div>
+
+  <ul class="action-list">
+    <li><div class="action-icon icon-merge">🔀</div><strong>למזג:</strong>&nbsp; "פסיכולוגיה צרכנית" + "שיעור חובה! פסיכולוגיה צרכנית" → סרטון אחד</li>
+    <li><div class="action-icon icon-merge">🔀</div><strong>למזג:</strong>&nbsp; "איך לייצר הצעה מנצחת" + "כל הפרמטרים" → סרטון אחד</li>
+    <li><div class="action-icon icon-merge">🔀</div><strong>למזג:</strong>&nbsp; "מחקר מתחרים Ads Library" + "Ad Library סקירה" (שבוע ד׳) → סרטון אחד</li>
+    <li><div class="action-icon icon-move">↗️</div><strong>להזיז:</strong>&nbsp; "מה זה דרופשיפינג" → מ-שבוע א׳ ל-שבוע 0</li>
+    <li><div class="action-icon icon-move">↗️</div><strong>להזיז:</strong>&nbsp; "הזמנת סרטון ברמה גבוהה" → מ-שבוע ד׳ ל-שבוע ג׳ (קריאייטיב)</li>
+    <li><div class="action-icon icon-delete">🗑️</div><strong>למחוק:</strong>&nbsp; "הסבר על Ads Library" מ-שבוע א׳ (מכוסה בשבוע 0 + ד׳)</li>
+    <li><div class="action-icon icon-hide">👁️</div><strong>להסתיר:</strong>&nbsp; ~80 שיעורי Draft שגלויים לתלמידים</li>
+  </ul>
+</div>
+
+<!-- ==================== מבנה מעודכן ==================== -->
+<div class="section">
+  <div class="section-title">מבנה קורס מעודכן — שיעורים פורסמים בלבד</div>
+  <div class="section-subtitle">כל שבוע עם סרטונים חדשים משולבים במקום הנכון</div>
+
+  <!-- שבוע 0 -->
+  <div class="week-header">שבוע 0 — מתחיל מוחלט (חדש)</div>
+  <table>
+    <tr><th>#</th><th>שם השיעור</th><th>סטטוס</th><th>הערות</th></tr>
+    <tr><td>1</td><td>מה זה דרופשיפינג ואיך מתחילים להרוויח?</td><td><span class="badge badge-move">להזיז מ-שבוע א׳</span></td><td>שיעור ראשון בקורס</td></tr>
+    <tr><td>2</td><td>מפת דרכים — מה נעשה בכל שבוע</td><td><span class="badge badge-new">חדש - להקליט</span></td><td>3-4 דק׳ | מצגת פשוטה</td></tr>
+    <tr><td>3</td><td>תקציב ריאלי — כמה כסף צריך</td><td><span class="badge badge-new">חדש - להקליט</span></td><td>3-4 דק׳ | $400-900 להתחלה</td></tr>
+    <tr><td>4</td><td>מילון מונחים — כל המושגים</td><td><span class="badge badge-new">חדש - להקליט</span></td><td>5-7 דק׳ | הקלטת מסך ויזואלית</td></tr>
+    <tr><td>5</td><td>הכלים שנשתמש בהם — סיור מהיר</td><td><span class="badge badge-new">חדש - להקליט</span></td><td>5 דק׳ | כל כלי = 30 שניות</td></tr>
+    <tr><td>6</td><td>מה זה פרסום ולמה חייבים אותו</td><td><span class="badge badge-new">חדש - להקליט</span></td><td>3 דק׳</td></tr>
+    <tr><td>7</td><td>Glossary — מילון מונחים כתוב</td><td><span class="badge badge-new-text">טקסט חדש</span></td><td>טבלה לחזרה</td></tr>
+  </table>
+
+  <!-- שבוע א -->
+  <div class="week-header">שבוע א׳ — מציאת נישה ומוצר</div>
+  <table>
+    <tr><th>#</th><th>שם השיעור</th><th>סטטוס</th><th>הערות</th></tr>
+    <tr><td>1</td><td>יעדי השבוע</td><td><span class="badge badge-new">חדש - להקליט</span></td><td>1-2 דק׳</td></tr>
+    <tr><td>2</td><td>כאן מתחילים #1 — מועדון האיקומרס</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>3</td><td>כאן מתחילים #2 — מבנה הקורס</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>4</td><td>תמיכה 24/7</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>5</td><td>קצת על עצמי</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>6</td><td>מטרות</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>7</td><td>מי ומה תהיה אחרי שתסיים</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>8</td><td>מיסים</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>9</td><td>פסיכולוגיה צרכנית</td><td><span class="badge badge-merge">למזג 2→1</span></td><td>לאחד 2 שיעורים קיימים</td></tr>
+    <tr><td>10</td><td>יש לך מבחן!</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>11</td><td>פידבק אישי להתקדמות</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>12</td><td>כלים ומדריכים להמשך</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>13</td><td>הבדלי ספקים</td><td><span class="badge badge-existing">קיים</span></td><td>להוסיף פתיחה: "ספק = מי שמייצר ושולח"</td></tr>
+    <tr><td>14</td><td>התחלת מציאת מוצר + Ali Tools</td><td><span class="badge badge-existing">קיים</span></td><td>להוסיף: "Ali Tools = תוסף כרום"</td></tr>
+    <tr><td>15</td><td>איך למצוא מוצר שיעור 1</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>16</td><td>איך למצוא מוצר שיעור 2</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>17</td><td>מציאת מוצר עם AI</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>18</td><td>מציאת מוצר נכון — Money Maker</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>19</td><td>הקדמה — חנויות שמייצרות כסף</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>20</td><td>מציאת מוצר ב-Real Time</td><td><span class="badge badge-new">חדש - להקליט</span></td><td>15-20 דק׳ | עדיפות ג׳</td></tr>
+    <tr><td>21</td><td>צ׳ק ליסט מציאת מוצר</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>22</td><td>מציאת קריאייטיבים למוצר</td><td><span class="badge badge-existing">קיים</span></td><td>להוסיף: "קריאייטיב = סרטון/תמונה בפרסום"</td></tr>
+    <tr><td>23</td><td>מוצר דרופשיפינג מול מוצר מנוי</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>24</td><td>סיכום פרק מציאת מוצר</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>25</td><td>תכנים אקסטרה — מאסטרקלאסים</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>26</td><td>הספק הפרטי שלכם</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>27</td><td>ספק פרטי + חיבור מוצר חדש</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>28</td><td>העלאת מוצר בעזרת CJ</td><td><span class="badge badge-existing">קיים</span></td><td>להוסיף: "CJ = פלטפורמת ספקים"</td></tr>
+    <tr><td>29</td><td>חיבור מוצר קיים ל-CJ</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>30</td><td>איך לייצר הצעה מנצחת</td><td><span class="badge badge-merge">למזג 2→1</span></td><td>לאחד 2 שיעורים</td></tr>
+    <tr><td>31</td><td>דוגמאות: אתרים עם הצעה מנצחת</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>32</td><td>צ׳קליסט סוף שבוע א׳</td><td><span class="badge badge-new-text">טקסט חדש</span></td><td>"ודאו: מוצר, ספק, קריאייטיב, הצעת ערך"</td></tr>
+  </table>
+  <p style="font-size:13px; color:#c62828; margin-top:8px;"><strong>למחוק:</strong> "הסבר על Ads Library" (מכוסה בשבוע 0 + ד׳)</p>
+
+  <!-- שבוע ב -->
+  <div class="week-header">שבוע ב׳ — הקמת החנות</div>
+  <table>
+    <tr><th>#</th><th>שם השיעור</th><th>סטטוס</th><th>הערות</th></tr>
+    <tr><td>1</td><td>יעדי השבוע + סיכום שבוע א׳</td><td><span class="badge badge-new">חדש - להקליט</span></td><td>1-2 דק׳</td></tr>
+    <tr><td>2</td><td>בניית האתר לפני שמתחילים</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>3</td><td>הצעד הראשון לפתיחת חנות</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>4</td><td>סט אפ חנות שופיפיי בחינם</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>5</td><td>360 על שופיפיי ומה שבפנים</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>6</td><td>הבק של שופיפיי — הגדרות, טמפלט, צ׳ק אאוט, ערים</td><td><span class="badge badge-new">חדש - להקליט</span></td><td>10-15 דק׳ | תלמידים אמרו שחסר!</td></tr>
+    <tr><td>7</td><td>פתיחת דף צור קשר</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>8</td><td>הוספת פוליסות</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>9</td><td>יצירת מוצר וקולקציה ידנית</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>10</td><td>בניית תפריט</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>11</td><td>יצירת לוגו</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>12</td><td>תמונות ועיצובים</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>13</td><td>חובה! העלאת מוצר לפני טמפלט</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>14</td><td>התקנת טמפלט</td><td><span class="badge badge-existing">קיים</span></td><td>להוסיף: "טמפלט = עיצוב מוכן"</td></tr>
+    <tr><td>15</td><td>בניית דף מוצר שלב א׳</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>16</td><td>בניית דף מוצר שלב ב׳</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>17</td><td>תמונות בחינם (בונוס)</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>18</td><td>הגדרות ומה שמסביב</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>19</td><td>סליקה</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>20</td><td>בחירת תכנית שופיפיי</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>21</td><td>חיבור דומיין</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>22</td><td>שחרור סיסמא</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>23</td><td>הקמת אימייל חברה</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>24</td><td>עדכון דף צור קשר</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>25</td><td>כותרת ותיאור לגוגל</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>26</td><td>שילוח + פוליסת שילוח</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>27</td><td>שיטת תשלום</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>28</td><td>מטבע תשלום</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>29</td><td>חיבור אימייל מרקטינג</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>30</td><td>הזמנה לניסיון</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>31</td><td>עדכון ערכת נושא (להרפתקנים)</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>32</td><td>צ׳קליסט סוף שבוע ב׳</td><td><span class="badge badge-new-text">טקסט חדש</span></td><td>"ודאו: חנות, דף מוצר, דומיין, סליקה"</td></tr>
+  </table>
+
+  <!-- שבוע ג -->
+  <div class="week-header">שבוע ג׳ — קריאייטיב והכנה לפרסום</div>
+  <table>
+    <tr><th>#</th><th>שם השיעור</th><th>סטטוס</th><th>הערות</th></tr>
+    <tr><td>1</td><td>יעדי השבוע + סיכום שבוע ב׳</td><td><span class="badge badge-new">חדש - להקליט</span></td><td>1-2 דק׳</td></tr>
+    <tr><td>2</td><td>שיפצור החנות</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>3</td><td>סידור צ׳ק אאוט</td><td><span class="badge badge-existing">קיים</span></td><td>להוסיף: "צ׳ק אאוט = דף התשלום"</td></tr>
+    <tr><td>4</td><td>תיקון באג אזל המלאי</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>5</td><td>נגישות לאתרים ישראלים</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>6</td><td>מלל נגישות</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>7</td><td>התראות ללקוח לאחר רכישה</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>8</td><td>רכישה ראשונה מה עושים?</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>9</td><td>השחזות לפני עלייה לאוויר</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>10</td><td>מה זה קריאייטיב ולמה חשוב</td><td><span class="badge badge-new">חדש - להקליט</span></td><td>3 דק׳ | הסבר בסיסי לפני שיעורי הקריאייטיב</td></tr>
+    <tr><td>11</td><td>איך לייצר קריאייטיב מנצח</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>12-16</td><td>קריאייטיב שיעורים א׳-ה׳</td><td><span class="badge badge-existing">קיים</span></td><td>5 שיעורים</td></tr>
+    <tr><td>17</td><td>קייס סטאדי קריאייטיב 7,500</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>18</td><td>הזמנת סרטון ברמה גבוהה</td><td><span class="badge badge-move">להזיז מ-שבוע ד׳</span></td><td>מתאים יותר לפרק קריאייטיב</td></tr>
+    <tr><td>19</td><td>פופ-אפ ממיר</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>20</td><td>פופ-אפ לשידרוג הברנד</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>21</td><td>אימייל סיקוונס לאחר רכישה</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>22</td><td>תוכן שיווקי במהירות</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>23</td><td>צ׳קליסט סוף שבוע ג׳</td><td><span class="badge badge-new-text">טקסט חדש</span></td><td>"ודאו: צ׳ק אאוט, נגישות, קריאייטיב, פופ-אפ"</td></tr>
+  </table>
+
+  <!-- שבוע ד -->
+  <div class="week-header">שבוע ד׳ — שיווק, פרסום ומכירות</div>
+  <table>
+    <tr><th>#</th><th>שם השיעור</th><th>סטטוס</th><th>הערות</th></tr>
+    <tr><td>1</td><td>יעדי השבוע + סיכום שבוע ג׳</td><td><span class="badge badge-new">חדש - להקליט</span></td><td>1-2 דק׳</td></tr>
+    <tr><td>2</td><td>מה זה פייסבוק Ads ואיך המערכת עובדת</td><td><span class="badge badge-new">חדש - להקליט</span></td><td>3-4 דק׳ | הסבר בסיסי: קמפיין→אד סט→מודעה</td></tr>
+    <tr><td>3</td><td>פייסבוק...מתחילים</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>4</td><td>בנייה והקמה ראשונית</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>5</td><td>הגדרת פרמטרים</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr class="critical"><td>6</td><td><strong>התקנת פיקסל</strong></td><td><span class="badge badge-new">חדש - להקליט</span></td><td><strong>הקיים ב-Draft! חור קריטי. 5-7 דק׳</strong></td></tr>
+    <tr><td>7</td><td>מחקר מתחרים — Ads Library</td><td><span class="badge badge-merge">למזג 2→1</span></td><td>למזג עם "Ad Library סקירה"</td></tr>
+    <tr><td>8</td><td>תמונה מול וידיאו + סשן מלא</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>9</td><td>קמפיין טסטים ראשוני</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>10</td><td>ברייק איוון</td><td><span class="badge badge-existing">קיים</span></td><td>להוסיף: "ברייק איוון = נקודת האיזון"</td></tr>
+    <tr><td>11</td><td>לעצור או להמשיך?</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>12</td><td>קריאת נתונים — חובה</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>13</td><td>סקייל מנצח</td><td><span class="badge badge-existing">קיים</span></td><td>להוסיף: "סקייל = להגדיל תקציב"</td></tr>
+    <tr><td>14</td><td>בחינת קריאייטיבים + שאלות</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>15</td><td>סקייל — דפים נוספים</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>16</td><td>ריטרגטינג</td><td><span class="badge badge-existing">קיים</span></td><td>להוסיף: "ריטרגטינג = פרסום חוזר"</td></tr>
+    <tr><td>17</td><td>סיכום פייסבוק</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>18</td><td>ברוך הבא לגוגל</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>19</td><td>חשבון גוגל + מרצ׳נט</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>20</td><td>הגדרות מרצ׳נט סנטר</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>21</td><td>מעקב המרות</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>22</td><td>קמפיין שופינג-פרפורמנס</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>23</td><td>אופטימיזציה בגוגל שופינג</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>24</td><td>הגדרות נוספות מרצ׳נט</td><td><span class="badge badge-existing">קיים</span></td><td></td></tr>
+    <tr><td>25</td><td>צ׳קליסט סוף שבוע ד׳</td><td><span class="badge badge-new-text">טקסט חדש</span></td><td>"סיימתם! פיקסל, קמפיין, ברייק איוון"</td></tr>
+  </table>
+
+  <!-- בונוסים -->
+  <div class="week-header" style="background: linear-gradient(135deg, #43a047, #2e7d32);">בונוסים (פורסמים — מודול נפרד)</div>
+  <table>
+    <tr><th>קטגוריה</th><th>שיעורים</th><th>כמות</th></tr>
+    <tr><td>טראפיק חינם</td><td>פייסבוק, קוואורה, רדיט, בלוג, יוטיוב, פינטרסט, סיכום</td><td>8</td></tr>
+    <tr><td>SEO + אפיליאט</td><td>קידום אורגני, בלוגים, יוטיוב, שותפויות, אסטרטגיית כתבה</td><td>5</td></tr>
+    <tr><td>פינטרסט אורגני</td><td>אסטרטגיה מלאה</td><td>1</td></tr>
+    <tr><td>מפגשים + קייס סטאדי</td><td>2 שינויים מ-9K ל-39K, קייס סטאדי $100K (6 סרטונים)</td><td>8</td></tr>
+  </table>
+</div>
+
+<!-- ==================== לו"ז ==================== -->
+<div class="section">
+  <div class="section-title">לו"ז מרוכז</div>
+  <div class="timeline">
+    <div class="timeline-item"><div class="timeline-date">20/4</div><div class="timeline-task">הסתרת ~80 שיעורי Draft</div></div>
+    <div class="timeline-item"><div class="timeline-date">22/4</div><div class="timeline-task">מילון מונחים + מפת דרכים + תקציב ריאלי + הכלים + מה זה פרסום + פיקסל</div></div>
+    <div class="timeline-item"><div class="timeline-date">24/4</div><div class="timeline-task">צ׳קליסטים לכל השבועות + Glossary טקסטואלי</div></div>
+    <div class="timeline-item"><div class="timeline-date">1/5</div><div class="timeline-task">מיזוג כפילויות (פסיכולוגיה, הצעה מנצחת, Ads Library)</div></div>
+    <div class="timeline-item"><div class="timeline-date">5/5</div><div class="timeline-task">יעדי שבועות + מה זה קריאייטיב + מה זה FB Ads + הבק שופיפיי</div></div>
+    <div class="timeline-item"><div class="timeline-date">15/5</div><div class="timeline-task">סרטון מציאת מוצר Real Time</div></div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+# ================================================
+# KAJABI: Settings → SEO → robots.txt
+# Replace the ENTIRE content with this:
+# ================================================
+
+User-agent: *
+Allow: /
+
+# Block internal/funnel pages from indexing
+Disallow: /e642b6b0-e3d2-487f-b7a0-49ce351cf4cd
+Disallow: /checkout/
+Disallow: /login
+Disallow: /library
+
+# Sitemap
+Sitemap: https://www.avivmalka.com/sitemap.xml
